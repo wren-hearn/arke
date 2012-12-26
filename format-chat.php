@@ -1,7 +1,11 @@
 
 <div class="inset-content-block">
 
-	<?php the_content(); ?>
+	<h6><?php the_title(); ?></h6>
+
+	<pre>
+		<?php the_content(); ?>
+	</pre>
 
 	<?php get_template_part( 'content-meta' ); ?>
 

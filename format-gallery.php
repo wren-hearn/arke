@@ -1,13 +1,10 @@
 
-<?php the_content(); ?>
+<div class="inset-content-block">
 
-<div class="content-meta">
-	<p class="author-byline">
-		<small>
-			<?php the_author_posts_link(); ?>
-		</small>
-		<small class="muted">
-			| <?php the_time('F j, Y') ?>
-		</small>
-	</p>
-</div>
+	<?php the_content(); ?>
+
+	<p><?php the_title(); ?></p>
+
+	<?php get_template_part( 'content-meta' ); ?>
+
+</div>  <!-- ./inset-content-block -->

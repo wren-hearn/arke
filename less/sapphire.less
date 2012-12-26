@@ -1,49 +1,94 @@
 
-
+/* Variables */
 @primary-background: #555;
+@primary-foreground: #ffffff;
+
+@primary-text: #000000;
 
 @text-padding: 1em;
-@outer-padding: (@text-padding / 2);
+@outer-padding: 6px;
 
+@paragraph-gap: 0.5em;
+
+@thumbnail-height: 200px;
+
+/* Fixes */
+blockquote p + p { margin-top: @paragraph-gap; }
+pre p { margin-bottom: 0; }
+
+/* Mixins */
 .side-padding (@p) {
 	padding-left: @p;
 	padding-right: @p;
 }
-
 .top-padding (@p) {
 	padding-top: @p;
 }
-
 .box-sizing ( @model ) {
 	-webkit-box-sizing: @model;
 	-moz-box-sizing: @model;
 	box-sizing: @model;
 }
+.transparent-container {
+	background-color: fadeout( @primary-foreground, 80% );
+}
+.transparent-readable {
+	background-color: fadeout( @primary-foreground, 35% );
+}
 
 
+/* Page Design */
 body { background-color: @primary-background; }
 
-
-
-.content {
-	.box-sizing( border-box );
-
-	background-color: lighten(@primary-background, 40%);
+.container {
+	/* .box-sizing( border-box ); */
+	.transparent-container;
 	padding: @outer-padding;
 }
 
-.content-piece {
+
+/* Content */
+.content {
+	.box-sizing( border-box );
+	.transparent-container;
+	padding: @outer-padding;
+}
+.inset-content-block {
 	.box-sizing( border-box );
 	overflow: auto;
-
-	background-color: lighten(@primary-background, 80%);
+	background-color: @primary-foreground;
 	.side-padding( @text-padding );
 	.top-padding( @text-padding );
 }
-	.content-piece + .content-piece {
+	.post + .post {
 		margin-top: @outer-padding;
 	}
 
+.post-icon {
+	background-color: @primary-foreground;
+	.box-sizing( border-box );
+	/*padding: @outer-padding;
+	overflow: hide;*/
+	font-size: 3em;
+}
+
+.post-thumbnail {
+	position: relative;
+	display: block;
+	height: @thumbnail-height;
+}
+	.post-thumbnail h1 {
+		display: inline;
+		margin: 0;
+		position: absolute;
+		bottom: (@text-padding / 4);
+		left: 0;
+		padding: (@text-padding / 4);
+		.transparent-readable;
+	}
+	.thumbnail-link {
+		color: @primary-text;
+	}
 
 
 

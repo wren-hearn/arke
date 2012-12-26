@@ -3,6 +3,6 @@
 
 	<?php the_content(); ?>
 
-	<?php get_template_part( 'content-meta' ); ?>
+	<?php get_template_part( 'content-meta', 'no-permalink' ); ?>
 
 </div>  <!-- ./inset-content-block -->
