@@ -1,7 +1,16 @@
-<?php
 
-get_header();
+<?php get_header(); ?>
 
-get_template_part( 'loop-minimal' );
+<div class="row">
 
-get_footer();
+	<div class="content span8">
+		<?php get_template_part( 'loop' ); ?>
+	</div>
+
+	<div class="sidebar span4">
+		<?php get_sidebar(); ?>
+	</div>
+
+</div>
+
+<?php get_footer(); ?>

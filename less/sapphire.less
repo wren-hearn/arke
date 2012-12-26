@@ -1,0 +1,38 @@
+
+
+@primary_background: #555;
+
+@text_padding: 1em;
+
+.side-padding (@p) {
+	padding-left: @p;
+	padding-right: @p;
+}
+
+.box-sizing ( @model ) {
+	-webkit-box-sizing: @model;
+	-moz-box-sizing: @model;
+	box-sizing: @model;
+}
+
+
+body { background-color: @primary_background; }
+
+
+
+.content {
+	.box-sizing( border-box );
+
+	background-color: lighten(@primary_background, 80%);
+	.side-padding( @text_padding );
+}
+
+
+
+
+
+
+
+
+
+
