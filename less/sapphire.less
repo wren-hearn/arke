@@ -1,12 +1,17 @@
 
 
-@primary_background: #555;
+@primary-background: #555;
 
-@text_padding: 1em;
+@text-padding: 1em;
+@outer-padding: (@text-padding / 2);
 
 .side-padding (@p) {
 	padding-left: @p;
 	padding-right: @p;
+}
+
+.top-padding (@p) {
+	padding-top: @p;
 }
 
 .box-sizing ( @model ) {
@@ -16,16 +21,28 @@
 }
 
 
-body { background-color: @primary_background; }
+body { background-color: @primary-background; }
 
 
 
 .content {
 	.box-sizing( border-box );
 
-	background-color: lighten(@primary_background, 80%);
-	.side-padding( @text_padding );
+	background-color: lighten(@primary-background, 40%);
+	padding: @outer-padding;
 }
+
+.content-piece {
+	.box-sizing( border-box );
+	overflow: auto;
+
+	background-color: lighten(@primary-background, 80%);
+	.side-padding( @text-padding );
+	.top-padding( @text-padding );
+}
+	.content-piece + .content-piece {
+		margin-top: @outer-padding;
+	}
 
 
 
