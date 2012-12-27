@@ -30,7 +30,7 @@ pre p { margin-bottom: 0; }
 	box-sizing: @model;
 }
 .transparent-container {
-	background-color: fadeout( @primary-foreground, 80% );
+	background-color: fadeout( @primary-foreground, 60% );
 }
 .transparent-readable {
 	background-color: fadeout( @primary-foreground, 35% );
@@ -38,21 +38,16 @@ pre p { margin-bottom: 0; }
 
 
 /* Page Design */
-body { background-color: @primary-background; }
+/* body { background-color: @primary-background; } */
 
 .container {
-	/* .box-sizing( border-box ); */
+	/*.box-sizing( border-box );*/
 	.transparent-container;
 	padding: @outer-padding;
 }
 
 
 /* Content */
-.content {
-	.box-sizing( border-box );
-	.transparent-container;
-	padding: @outer-padding;
-}
 .inset-content-block {
 	.box-sizing( border-box );
 	overflow: auto;
@@ -60,16 +55,16 @@ body { background-color: @primary-background; }
 	.side-padding( @text-padding );
 	.top-padding( @text-padding );
 }
-	.post + .post {
-		margin-top: @outer-padding;
-	}
+.post + .post {
+	margin-top: @outer-padding;
+}
 
 .post-icon {
+	float: left;
+	margin-right: (@text-padding / 2);
 	background-color: @primary-foreground;
 	.box-sizing( border-box );
-	/*padding: @outer-padding;
-	overflow: hide;*/
-	font-size: 3em;
+	font-size: (@text-padding * 2);
 }
 
 .post-thumbnail {

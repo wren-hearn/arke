@@ -1,17 +1,10 @@
 
-<div class="row">
+<div class="inset-content-block">
 
-	<div class="span1 post-icon">
-
+	<div class="post-icon">
 		<i class="icon-link"></i>
-
 	</div>
 
-	<div class="span7 inset-content-block">
+	<?php the_content(); ?>
 
-		<?php the_content(); ?>
-
-	</div>  <!-- ./inset-content-block -->
-</div>
-
-
+</div>  <!-- ./inset-content-block -->

@@ -3,7 +3,7 @@
 
 <div class="row">
 
-	<div class="content span8">
+	<div class="span8">
 		<?php get_template_part( 'loop' ); ?>
 	</div>
 
