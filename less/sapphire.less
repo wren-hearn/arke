@@ -1,9 +1,13 @@
 
-/* Variables */
-@primary-background: #555;
+
+/* Variables
+-------------------------------------------------- */
+
 @primary-foreground: #ffffff;
+@secondary-foreground: #08C;
 
 @primary-text: #000000;
+@secondary-text: #ffffff;
 
 @text-padding: 1em;
 @outer-padding: 6px;
@@ -12,11 +16,19 @@
 
 @thumbnail-height: 200px;
 
-/* Fixes */
+
+
+/* Fixes
+-------------------------------------------------- */
+
 blockquote p + p { margin-top: @paragraph-gap; }
 pre p { margin-bottom: 0; }
 
-/* Mixins */
+
+
+/* Mixins
+-------------------------------------------------- */
+
 .side-padding (@p) {
 	padding-left: @p;
 	padding-right: @p;
@@ -36,14 +48,85 @@ pre p { margin-bottom: 0; }
 	background-color: fadeout( @primary-foreground, 35% );
 }
 
-/* Page Design */
+
+
+/* Page Design
+-------------------------------------------------- */
+		
 .container {
 	/*.box-sizing( border-box );*/
 	.transparent-container;
 	padding: @outer-padding;
 }
 
-/* Content */
+
+
+/* Navigation
+-------------------------------------------------- */
+
+.top-navigation-menu{
+
+	display: block;
+
+	&, & ul {
+		margin: 0;
+	}
+	li {
+		position: relative;
+		display: block;
+		float: left;
+		margin: 0;
+		padding: 0;
+	}
+	&>li {
+		margin-bottom: (@outer-padding * 2);
+	}
+	&>.menu-parent-item {
+		
+	}
+	li a {
+		border-left: 1px dotted @secondary-foreground;
+		display: inline-block;
+		padding: @outer-padding;
+		background-color: @primary-foreground;
+	}
+		&>li:first-child a {
+			border: 0;
+		}
+	li ul {
+		display: none;
+		position: absolute;
+		background-color: @secondary-foreground;
+	}
+	li li {
+		display: block;
+		background: #f0f;
+	}	
+	ul li a {
+		border: 0;
+		border-top: 1px dotted @primary-foreground;
+		background-color: @secondary-foreground;
+		color: @secondary-text;
+	}
+		ul>li:first-child>a {
+			border: 0;
+		}
+	li:hover>ul {
+		display: block;
+		z-index: 1;
+	}
+	ul li:hover>ul {
+		left: 100%;
+		top: 0;
+	}
+
+}
+
+
+
+/* Content
+-------------------------------------------------- */
+
 .inset-content-block {
 	.box-sizing( border-box );
 	overflow: auto;
