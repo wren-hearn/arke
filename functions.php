@@ -34,9 +34,18 @@ add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', '
 // Register the main menu
 register_nav_menu( 'top-menu', 'Top Menu' );
 
+function sapphire_no_menu( $args )
+{
+	?>
+		<div class="alert alert-error">
+			<strong>No menus found!</strong> - Use <em>Appearance > Menus</em> to create a menu and assign it to this location.
+		</div>
+	<?php
+}
+
 // Add a CSS class to parents of submenus
-add_filter( 'wp_nav_menu_objects', 'add_menu_parent_class' );
-function add_menu_parent_class( $items )
+add_filter( 'wp_nav_menu_objects', 'sapphire_add_menu_parent_class' );
+function sapphire_add_menu_parent_class( $items )
 {
 	$parents = array();
 	foreach ( $items as $item )

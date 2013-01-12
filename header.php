@@ -31,7 +31,8 @@
 				$args = array(
 					'theme_location' => 'top-menu',
 					'container' => false,
-					'menu_class' => 'top-navigation-menu'
+					'menu_class' => 'top-navigation-menu',
+					'fallback_cb' => 'sapphire_no_menu'
 				);
 
 				wp_nav_menu($args);
