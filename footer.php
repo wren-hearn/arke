@@ -5,7 +5,6 @@
 
 		<!-- JavaScript in footer to improve page loading speed -->
 
-		<script src="<?php echo get_template_directory_uri(); ?>/js/jquery.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-transition.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-alert.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-modal.js"></script>

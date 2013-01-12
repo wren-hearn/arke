@@ -4,8 +4,8 @@ if( !is_admin() )
 {
 	add_filter('show_admin_bar', '__return_false');
 
-	add_action('wp_enqueue_scripts', 'script_setup');
-	function script_setup()
+	add_action('wp_enqueue_scripts', 'sapphire_script_setup');
+	function sapphire_script_setup()
 	{
 		wp_enqueue_script(
 			'sapphire',
@@ -18,9 +18,15 @@ if( !is_admin() )
 
 }
 
+// Not very automatic...
 add_theme_support( 'automatic-feed-links' );
+
+
+// Default background
 add_theme_support( 'custom-background', array( 'default-image' => get_template_directory_uri() . '/img/orange-rings-bg.jpg' ) );
 
+
+// Post thumbnails
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 9999, 200, true );
 add_image_size( 'big-thumbnail', 600, 200, true );
