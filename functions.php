@@ -44,6 +44,7 @@ function sapphire_no_menu( $args )
 {
 	?>
 		<div class="alert alert-error">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
 			<strong>No menus found!</strong> - Use <em>Appearance > Menus</em> to create a menu and assign it to this location.
 		</div>
 	<?php
