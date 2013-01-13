@@ -17,5 +17,6 @@
 			}
 			?>
 		</small>
+		<?php edit_post_link('Edit', '<small class="muted">|</small> <small>', '</small>'); ?>
 	</p>
 </div>

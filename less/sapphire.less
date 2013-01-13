@@ -47,12 +47,21 @@ pre p { margin-bottom: 0; }
 .transparent-readable {
 	background-color: fadeout( @primary-foreground, 35% );
 }
+.clearfix {
+	&:after {
+		content: ".";
+		display: block;
+		height: 0;
+		clear: both;
+		visibility: hidden;
+	}
+}
 
 
 
 /* Page Design
 -------------------------------------------------- */
-		
+
 .container {
 	/*.box-sizing( border-box );*/
 	.transparent-container;
@@ -67,6 +76,7 @@ pre p { margin-bottom: 0; }
 .top-navigation-menu{
 
 	display: block;
+	.clearfix;
 
 	&, & ul {
 		margin: 0;
@@ -101,7 +111,7 @@ pre p { margin-bottom: 0; }
 	li li {
 		display: block;
 		background: #f0f;
-	}	
+	}
 	ul li a {
 		border: 0;
 		border-top: 1px dotted @primary-foreground;
