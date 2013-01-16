@@ -22,6 +22,8 @@ homepage layout which allows for mix of image/content/lists/carousels. maybe hav
 
 homepage setup with option to select the categories the homepage draws from
 
+separate blog homepage from front-page template 
+
 alternate compact templates for post formats
 
 Post priority metadata to describe how important the content is (high, show as big as possible; medium, show with smaller thumb and headline; low, show headline only)
