@@ -18,11 +18,15 @@ lazy load as much javascript as possible
 
 framework for prefetch and ad serving that supports multiple profiles to load based on screen size (preferably javascript)
 
+search box using bootstrap components
+
 homepage layout which allows for mix of image/content/lists/carousels. maybe have a top bucket for newest content, then one for key categories, and fill out the rest with the last week of material with a day per row of elements
+
+Ubiquitous use of WordPress transients API to minimize queries
 
 homepage setup with option to select the categories the homepage draws from
 
-separate blog homepage from front-page template 
+separate blog homepage from front-page template
 
 alternate compact templates for post formats
 
