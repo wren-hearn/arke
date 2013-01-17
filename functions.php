@@ -66,11 +66,47 @@ function sapphire_add_menu_parent_class( $items )
 	{
 		if ( in_array( $item->ID, $parents ) )
 		{
-			$item->classes[] = 'menu-parent-item'; 
+			$item->classes[] = 'menu-parent-item';
 		}
 	}
-	return $items;    
+	return $items;
 }
+
+
+
+
+
+
+
+// Custom CSS for the login page
+// Create wp-login.css in your theme folder
+function wpfme_loginCSS() {
+	echo '<link rel="stylesheet" type="text/css" href="'.get_bloginfo('template_directory').'/wp-login.css"/>';
+}
+add_action('login_head', 'wpfme_loginCSS');
+
+
+// Set a maximum width for Oembedded objects
+if ( ! isset( $content_width ) )
+$content_width = 660;
+
+
+// Put post thumbnails into rss feed
+function wpfme_feed_post_thumbnail($content) {
+	global $post;
+	if(has_post_thumbnail($post->ID)) {
+		$content = '' . $content;
+	}
+	return $content;
+}
+add_filter('the_excerpt_rss', 'wpfme_feed_post_thumbnail');
+add_filter('the_content_feed', 'wpfme_feed_post_thumbnail');
+
+
+
+
+
+
 
 
 /*
