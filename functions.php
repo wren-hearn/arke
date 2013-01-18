@@ -23,7 +23,21 @@ add_theme_support( 'automatic-feed-links' );
 
 
 // Default background
-add_theme_support( 'custom-background', array( 'default-image' => get_template_directory_uri() . '/img/orange-rings-bg.jpg' ) );
+add_theme_support( 'custom-background',
+	array(
+	'default-image' => get_template_directory_uri() . '/img/orange-rings-bg.jpg'
+	)
+);
+
+
+// Default header image
+add_theme_support( 'custom-header',
+	array(
+		'width'         => 940,
+		'height'        => 100,
+		'flex-height'    => true
+	)
+);
 
 
 // Post thumbnails
@@ -80,10 +94,12 @@ function sapphire_add_menu_parent_class( $items )
 
 // Custom CSS for the login page
 // Create wp-login.css in your theme folder
-function wpfme_loginCSS() {
-	echo '<link rel="stylesheet" type="text/css" href="'.get_bloginfo('template_directory').'/wp-login.css"/>';
-}
 add_action('login_head', 'wpfme_loginCSS');
+function wpfme_loginCSS()
+{
+	echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/wp-login.css"/>';
+}
+
 
 
 // Set a maximum width for Oembedded objects
@@ -92,15 +108,17 @@ $content_width = 660;
 
 
 // Put post thumbnails into rss feed
-function wpfme_feed_post_thumbnail($content) {
+add_filter('the_excerpt_rss', 'wpfme_feed_post_thumbnail');
+add_filter('the_content_feed', 'wpfme_feed_post_thumbnail');
+function wpfme_feed_post_thumbnail( $content )
+{
 	global $post;
-	if(has_post_thumbnail($post->ID)) {
+	if(has_post_thumbnail($post->ID))
+	{
 		$content = '' . $content;
 	}
 	return $content;
 }
-add_filter('the_excerpt_rss', 'wpfme_feed_post_thumbnail');
-add_filter('the_content_feed', 'wpfme_feed_post_thumbnail');
 
 
 
@@ -109,21 +127,4 @@ add_filter('the_content_feed', 'wpfme_feed_post_thumbnail');
 
 
 
-/*
-// https://github.com/twittem/wp-bootstrap-navwalker
-// Register Custom Navigation Walker
-require_once('twitter_bootstrap_nav_walker.php');
-	<div class="navbar">
-		<div class="navbar-inner">
-				wp_nav_menu( array(
-					'menu'       => 'top_menu',
-					'depth'      => 2,
-					'container'  => false,
-					'menu_class' => 'nav',
-					//Process nav menu using our custom nav walker
-					'walker' => new twitter_bootstrap_nav_walker())
-				);
-		</div>  <!-- ./navbar-inner -->
-	</div>  <!-- ./navbar -->
-*/
 

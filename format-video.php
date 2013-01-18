@@ -1,8 +1,8 @@
 
-<div class="inset-content-block">
+<div class="full-excerpt-inset">
 
 	<?php the_content(); ?>
 
 	<?php get_template_part( 'content-meta', 'no-permalink' ); ?>
 
-</div>  <!-- ./inset-content-block -->
+</div>  <!-- ./full-excerpt-inset -->

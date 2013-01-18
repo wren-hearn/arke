@@ -70,7 +70,7 @@ pre p { margin-bottom: 0; }
 
 
 
-/* Navigation
+/* Navigation Module
 -------------------------------------------------- */
 
 .top-navigation-menu{
@@ -134,45 +134,46 @@ pre p { margin-bottom: 0; }
 
 
 
-/* Content
+/* Big Post Excerpt Module
 -------------------------------------------------- */
 
-.inset-content-block {
-	.box-sizing( border-box );
-	overflow: auto;
-	background-color: @primary-foreground;
-	.side-padding( @text-padding );
-	.top-padding( @text-padding );
-}
-.post + .post {
-	margin-top: @outer-padding;
-}
-
-.post-icon {
-	float: left;
-	margin-right: (@text-padding / 2);
-	background-color: @primary-foreground;
-	.box-sizing( border-box );
-	font-size: (@text-padding * 2);
-}
-
-.post-thumbnail {
-	position: relative;
-	display: block;
-	height: @thumbnail-height;
-}
-	.post-thumbnail h1 {
-		display: inline;
-		margin: 0;
-		position: absolute;
-		bottom: (@text-padding / 4);
-		left: 0;
-		padding: (@text-padding / 4);
-		.transparent-readable;
+.full-excerpt{
+	& + & {
+		margin-top: @outer-padding;
 	}
-	.thumbnail-link {
+}
+	.full-excerpt-inset {
+		.box-sizing( border-box );
+		overflow: auto;
+		background-color: @primary-foreground;
+		.side-padding( @text-padding );
+		.top-padding( @text-padding );
+	}
+		.full-excerpt-inset > .post-icon {
+			float: left;
+			margin-right: (@text-padding / 2);
+			background-color: @primary-foreground;
+			.box-sizing( border-box );
+			font-size: (@text-padding * 2);
+		}
+	.full-excerpt-thumbnail-link {
 		color: @primary-text;
 	}
+		.full-excerpt-post-thumbnail {
+			position: relative;
+			display: block;
+			height: @thumbnail-height;
+		}
+			.full-excerpt-post-thumbnail > h1 {
+				display: inline;
+				margin: 0;
+				position: absolute;
+				bottom: (@text-padding / 4);
+				left: 0;
+				padding: (@text-padding / 4);
+				.transparent-readable;
+			}
+
 
 
 

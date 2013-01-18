@@ -3,23 +3,22 @@
 if ( has_post_thumbnail() )
 {
 	?>
-	<div class="post-thumbnail-wrapper">
-		<?php if( !is_single() ): ?><a href="<?php the_permalink(); ?>" class="thumbnail-link"><?php endif; ?>
-			<span class="post-thumbnail" style="background-image: url('<?php
-			$image_meta = wp_get_attachment_image_src( get_post_thumbnail_id(), 'big-thumbnail' );
-			echo $image_meta[0];
-			?>');">
-				<h1><?php the_title(); ?></h1>
-			</span>
-		<?php if( !is_single() ): ?></a><?php endif; ?>
-	</div>
-	<div class="inset-content-block">
+	<?php if( !is_single() ): ?><a href="<?php the_permalink(); ?>" class="full-excerpt-thumbnail-link"><?php endif; ?>
+		<span class="full-excerpt-post-thumbnail" style="background-image: url('<?php
+		$image_meta = wp_get_attachment_image_src( get_post_thumbnail_id(), 'big-thumbnail' );
+		echo $image_meta[0];
+		?>');">
+			<h1><?php the_title(); ?></h1>
+		</span>
+	<?php if( !is_single() ): ?></a><?php endif; ?>
+
+	<div class="full-excerpt-inset">
 	<?php
 }
 else
 {
 	?>
-	<div class="inset-content-block">
+	<div class="full-excerpt-inset">
 		<h1>
 			<?php if( !is_single() ): ?><a href="<?php the_permalink(); ?>"><?php endif; ?>
 				<?php the_title(); ?>
@@ -58,4 +57,4 @@ else
 	}
 	?>
 
-</div>  <!-- ./inset-content-block -->
+</div>  <!-- ./full-excerpt-inset -->

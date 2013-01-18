@@ -1,5 +1,5 @@
 
-<div class="inset-content-block">
+<div class="full-excerpt-inset">
 
 	<div class="post-icon">
 		<i class="icon-music"></i>
@@ -9,4 +9,4 @@
 
 	<?php get_template_part( 'content-meta', 'no-permalink' ); ?>
 
-</div>  <!-- ./inset-content-block -->
+</div>  <!-- ./full-excerpt-inset -->

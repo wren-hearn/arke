@@ -1,5 +1,5 @@
 
-<div class="inset-content-block">
+<div class="full-excerpt-inset">
 
 	<div class="post-icon">
 		<i class="icon-pushpin"></i>
@@ -7,4 +7,4 @@
 
 	<?php the_content(); ?>
 
-</div>  <!-- ./inset-content-block -->
+</div>  <!-- ./full-excerpt-inset -->

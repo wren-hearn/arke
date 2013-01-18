@@ -1,5 +1,5 @@
 
-<div class="inset-content-block">
+<div class="full-excerpt-inset">
 
 	<div class="post-icon">
 		<i class="icon-comment-alt"></i>
@@ -9,4 +9,4 @@
 
 	<?php get_template_part( 'content-meta' ); ?>
 
-</div>  <!-- ./inset-content-block -->
+</div>  <!-- ./full-excerpt-inset -->
