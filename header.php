@@ -27,14 +27,19 @@
 				$custom_header = get_custom_header();
 				if ( $custom_header->url != '')
 				{
+					/*
 					?>
 					<img src="<?php echo $custom_header->url; ?>" height="<?php echo $custom_header->height; ?>" width="<?php echo $custom_header->width; ?>" alt="" />
 					<?php
+					*/
 				}
 				?>
+				<div class="site-header"<?php if($custom_header->url != ''): ?> style="background: url('<?php echo $custom_header->url; ?>'); height: <?php echo $custom_header->height; ?>px;"<?php endif; ?>>
+					<h2 class="site-header-title"><?php bloginfo('name'); ?></h2>
+					<p class="site-header-desc"><?php bloginfo('description'); ?></p>
+				</div>
 
-				<h2><?php bloginfo('name'); ?></h2>
-				<p class="muted"><?php bloginfo('description'); ?></p>
+
 
 				<?php
 

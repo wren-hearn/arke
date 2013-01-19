@@ -33,8 +33,8 @@ add_theme_support( 'custom-background',
 // Default header image
 add_theme_support( 'custom-header',
 	array(
-		'width'         => 940,
-		'height'        => 100,
+		'width'         => 1170,
+		'height'        => 120,
 		'flex-height'    => true
 	)
 );
@@ -104,7 +104,7 @@ function wpfme_loginCSS()
 
 // Set a maximum width for Oembedded objects
 if ( ! isset( $content_width ) )
-$content_width = 660;
+$content_width = 742;
 
 
 // Put post thumbnails into rss feed

@@ -1,4 +1,5 @@
 
+choose a new name for the theme and re-name test sites and code
 
 learn how to compile LESS with node.js
 

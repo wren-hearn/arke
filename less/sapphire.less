@@ -1,7 +1,24 @@
 
 
+/*
+
+|------------------------------1170px---------------------------------|
+
+Two-column full-width viewport diagram
+|-----------------770px-----------------||-30px-||-------370px--------|
+Two-column content inside 14px padding
+  |---------------742px---------------|            |-----342px------|
+
+
+
+
+*/
+
+
 /* Variables
 -------------------------------------------------- */
+
+@header-color: #63c5ed;
 
 @primary-foreground: #ffffff;
 @secondary-foreground: #08C;
@@ -59,14 +76,41 @@ pre p { margin-bottom: 0; }
 
 
 
-/* Page Design
+/* Layout
 -------------------------------------------------- */
 
 .container {
-	/*.box-sizing( border-box );*/
 	.transparent-container;
 	padding: @outer-padding;
 }
+
+
+
+/* Site Header Module
+-------------------------------------------------- */
+
+.site-header {
+	background-color: @header-color;
+	overflow: hide;
+	min-height: 120px;
+}
+	.site-header-title, .site-header-desc {
+		display: block;
+		float: left;
+		clear: both;
+		padding: (@text-padding / 4) (@text-padding / 2);
+		.transparent-readable;
+	}
+	.site-header-title {
+		margin: 0.5em 0 0 5%;
+	}
+	.site-header-desc {
+		margin: 0.5em 0 0 10%;
+	}
+
+
+
+
 
 
 
