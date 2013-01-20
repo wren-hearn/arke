@@ -35,7 +35,7 @@
 				}
 				?>
 				<div class="site-header"<?php if($custom_header->url != ''): ?> style="background: url('<?php echo $custom_header->url; ?>'); height: <?php echo $custom_header->height; ?>px;"<?php endif; ?>>
-					<h2 class="site-header-title"><?php bloginfo('name'); ?></h2>
+					<h2 class="site-header-title"><a href="<?php echo site_url('/'); ?>"><?php bloginfo('name'); ?></a></h2>
 					<p class="site-header-desc"><?php bloginfo('description'); ?></p>
 				</div>
 

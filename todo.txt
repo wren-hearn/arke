@@ -3,8 +3,6 @@ choose a new name for the theme and re-name test sites and code
 
 learn how to compile LESS with node.js
 
-custom header image
-
 re-implement nav styles so they work with the default wp_pages_list function as well as the registered nav menu
 
 re-organize styles to conform to modular css

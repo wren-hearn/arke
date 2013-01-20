@@ -40,10 +40,17 @@ add_theme_support( 'custom-header',
 );
 
 
+// Set a maximum width for Oembedded objects
+if ( ! isset( $content_width ) )
+$content_width = 742;
+
+
 // Post thumbnails
 add_theme_support( 'post-thumbnails' );
 set_post_thumbnail_size( 9999, 200, true );
-add_image_size( 'big-thumbnail', 600, 200, true );
+add_image_size( 'big-thumbnail', 770, 200, true );
+
+
 
 
 
@@ -102,9 +109,7 @@ function wpfme_loginCSS()
 
 
 
-// Set a maximum width for Oembedded objects
-if ( ! isset( $content_width ) )
-$content_width = 742;
+
 
 
 // Put post thumbnails into rss feed
