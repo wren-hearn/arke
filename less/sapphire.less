@@ -64,6 +64,9 @@ pre p { margin-bottom: 0; }
 .transparent-readable {
 	background-color: fadeout( @primary-foreground, 35% );
 }
+.transparent-ultra-readable {
+	background-color: fadeout( @primary-foreground, 20% );
+}
 .clearfix {
 	&:after {
 		content: ".";
@@ -99,7 +102,7 @@ pre p { margin-bottom: 0; }
 		float: left;
 		clear: both;
 		padding: (@text-padding / 4) (@text-padding / 2);
-		.transparent-readable;
+		.transparent-ultra-readable;
 	}
 	.site-header-title {
 		margin: 0.5em 0 0 5%;
