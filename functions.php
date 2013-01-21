@@ -15,7 +15,7 @@ if( !is_admin() )
 
 // Try and find a way to disable the default query on pages where we're
 // we're doing it all manually
-add_filter( 'query_vars', 'disable_default_query' , 10, 1 );
+//add_filter( 'query_vars', 'disable_default_query' , 10, 1 );
 function disable_default_query( $query_vars )
 {
 	echo '<pre>';
