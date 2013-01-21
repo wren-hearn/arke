@@ -23,6 +23,17 @@ function disable_default_query( $query_vars )
 	echo '</pre>';
 	return $query_vars;
 }
+/*
+function _cancel_query( $query ) {
+ 
+    if ( !is_admin() &amp;&amp; !is_feed() &amp;&amp; is_search() ) {
+        $query = false;
+    }
+ 
+    return $query;
+}
+add_action( 'posts_request', '_cancel_query' );
+*/
 
 
 
