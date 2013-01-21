@@ -30,10 +30,13 @@
 				</div>
 
 
+				<?php get_search_form(); ?>
+
 
 				<?php
 				/* Main menu, cached with transient
 				-------------------------------------------------- */
+				/*
 				global $theme_namespace;
 				if ( false === ( $menu = get_transient( $theme_namespace . '_top_menu' ) ) )
 				{
@@ -48,8 +51,47 @@
 					set_transient( $theme_namespace . '_top_menu', $menu, WEEK_IN_SECONDS );
 				}
 				echo $menu;
+				*/
 				?>
 
+				<nav id="site-navigation" class="main-navigation" role="navigation">
+					<h3 class="menu-toggle">Menu</h3>
+					<a class="hidden" href="#content" title="Skip to content">Skip to content</a>
+					<?php
+					/* Main menu, cached with transient
+					-------------------------------------------------- */
+					global $theme_namespace;
+					if ( false === ( $menu = get_transient( $theme_namespace . '_top_menu' ) ) )
+					{
+						$args = array(
+							'theme_location' => 'top-menu',
+							'menu_class' => 'nav-menu',
+							'echo' => 0
+						);
+						$menu = wp_nav_menu($args);
+						set_transient( $theme_namespace . '_top_menu', $menu, MINUTE_IN_SECONDS );
+					}
+					echo $menu;
+					?>
+				</nav><!-- ./main-navigation -->
+
 			</header>
+
+			<div class="row">
+				<div class="span1 grid-preview">1</div>
+				<div class="span1 grid-preview">2</div>
+				<div class="span1 grid-preview">3</div>
+				<div class="span1 grid-preview">4</div>
+				<div class="span1 grid-preview">5</div>
+				<div class="span1 grid-preview">6</div>
+				<div class="span1 grid-preview">7</div>
+				<div class="span1 grid-preview">8</div>
+				<div class="span1 grid-preview">9</div>
+				<div class="span1 grid-preview">10</div>
+				<div class="span1 grid-preview">11</div>
+				<div class="span1 grid-preview">12</div>
+			</div>
+
+			
 
 			<?php apply_filters("debug", "Header end"); ?>

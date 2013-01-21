@@ -1,14 +1,14 @@
 <?php
 
 global $theme_namespace;
-if ( false === ( $newquery = get_transient( $theme_namespace . '_homepage_cool_stuff_query' ) ) )
+if ( false === ( $query = get_transient( $theme_namespace . '_homepage_cool_stuff_query' ) ) )
 {
 	$args = array(
 		'category_name' => 'cool-stuff',
 		'posts_per_page' => 20
 	);
-	$newquery = new WP_Query( $args );
-	set_transient( $theme_namespace . '_homepage_cool_stuff_query', $newquery, MINUTE_IN_SECONDS );
+	$query = new WP_Query( $args );
+	set_transient( $theme_namespace . '_homepage_cool_stuff_query', $query, MINUTE_IN_SECONDS );
 }
 
 
@@ -19,7 +19,7 @@ if ( false === ( $newquery = get_transient( $theme_namespace . '_homepage_cool_s
 
 	<div class="span5">
 
-		<?php if ( $newquery->have_posts() ) : while ( $newquery->have_posts() ): $newquery->the_post(); ?>
+		<?php if ( $query->have_posts() ) : while ( $query->have_posts() ): $query->the_post(); ?>
 
 			<div id="post-<?php the_ID(); ?>" <?php post_class('full-excerpt'); ?>>
 
@@ -42,7 +42,6 @@ if ( false === ( $newquery = get_transient( $theme_namespace . '_homepage_cool_s
 		<?php endwhile; else: ?>
 			<p><?php _e('Sorry, no posts matched your criteria.'); ?></p>
 		<?php endif; ?>
-		<?php wp_reset_query(); ?>
 
 	</div>
 

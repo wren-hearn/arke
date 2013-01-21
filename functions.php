@@ -25,7 +25,6 @@ function disable_default_query( $query_vars )
 	return $query_vars;
 }
 
-
 function _cancel_query( $query ) {
 	if ( !is_admin() && !$query->is_feed() && $query->is_home() && $query->is_main_query() )
 	{
@@ -37,14 +36,12 @@ function _cancel_query( $query ) {
 	}
 }
 add_action( 'pre_get_posts', '_cancel_query' );
-*/
-
 
 function pw_filter_query( $query ) {
 
-//echo '<pre>';
-//print_r( $query );
-//echo '</pre>';
+	//echo '<pre>';
+	//print_r( $query );
+	//echo '</pre>';
 	
 	if( $query->is_main_query() ) {
 		//echo "executed ";
@@ -54,8 +51,8 @@ function pw_filter_query( $query ) {
 		//$query->set( 'posts_per_page', 0 );
 	}
 }
-//add_action('pre_get_posts', 'pw_filter_query', 9999);
-
+add_action('pre_get_posts', 'pw_filter_query', 9999);
+*/
 
 
 
@@ -260,6 +257,8 @@ function sapphire_bust_menu_cache()
     delete_transient( $theme_namespace . '_top_menu' );
 }
 
+
+//delete_transient( $theme_namespace . '_top_menu' );
 
 
 

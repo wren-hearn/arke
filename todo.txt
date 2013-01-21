@@ -1,9 +1,13 @@
 
 choose a new name for the theme and re-name test sites and code
 
-learn how to compile LESS with node.js
+theme screenshot
 
-re-implement nav styles so they work with the default wp_pages_list function as well as the registered nav menu
+favicon, iOS big icons
+
+clean up menu styles for desktop and mobile, conform to modular css
+
+learn how to compile LESS with node.js
 
 responsive and touch-friendly main menu (use anchor link in mobile to point to footer menu)
 	http://www.queness.com/post/13093/responsive-mobile-navigation-menumethods-and-solutions
@@ -11,12 +15,6 @@ responsive and touch-friendly main menu (use anchor link in mobile to point to f
 default sidebar content
 
 page templates
-
-theme screenshot
-
-favicon, iOS big icons
-
-search box using bootstrap components
 
 alternate compact templates for post formats
 
