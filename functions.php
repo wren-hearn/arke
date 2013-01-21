@@ -15,6 +15,7 @@ if( !is_admin() )
 
 // Try and find a way to disable the default query on pages where we're
 // we're doing it all manually
+/*
 //add_filter( 'query_vars', 'disable_default_query' , 10, 1 );
 function disable_default_query( $query_vars )
 {
@@ -23,18 +24,37 @@ function disable_default_query( $query_vars )
 	echo '</pre>';
 	return $query_vars;
 }
-/*
+
+
 function _cancel_query( $query ) {
- 
-    if ( !is_admin() &amp;&amp; !is_feed() &amp;&amp; is_search() ) {
-        $query = false;
-    }
- 
-    return $query;
+	if ( !is_admin() && !$query->is_feed() && $query->is_home() && $query->is_main_query() )
+	{
+		$query->init();
+		//$query->query_vars['posts_per_page'] = 0;
+		//echo '<pre>';
+		//print_r( $query );
+		//echo '</pre>';
+	}
 }
-add_action( 'posts_request', '_cancel_query' );
+add_action( 'pre_get_posts', '_cancel_query' );
 */
 
+
+function pw_filter_query( $query ) {
+
+//echo '<pre>';
+//print_r( $query );
+//echo '</pre>';
+	
+	if( $query->is_main_query() ) {
+		//echo "executed ";
+		//$query->init();
+		$query->set('meta_key', 'nonsense_meta_key');
+		$query->set('meta_value', 'cellar_door');
+		//$query->set( 'posts_per_page', 0 );
+	}
+}
+//add_action('pre_get_posts', 'pw_filter_query', 9999);
 
 
 
@@ -182,7 +202,7 @@ function wpfme_feed_post_thumbnail( $content )
 }
 
 
-/* Performance Improvements
+/* Performance Improvements and Monitoring
 -------------------------------------------------- */
 
 // Remove unneeded widgets that have undesirable query overhead
@@ -207,6 +227,25 @@ function remove_unneeded_widgets() {
 		WP_Widget_Tag_Cloud               = Tag Cloud Widget
 		WP_Nav_Menu_Widget                = Menus Widget
 	*/
+}
+
+// Profiler checkpoints
+add_action( 'wp_loaded', 'set_checkpoint_wp_loaded' );
+function set_checkpoint_wp_loaded()
+{
+	apply_filters("debug", "WordPress loaded");
+}
+
+add_action( 'wp_head', 'set_checkpoint_wp_head' );
+function set_checkpoint_wp_head()
+{
+	apply_filters("debug", "wp_head()");
+}
+
+add_action( 'the_post', 'set_checkpoint_the_post' );
+function set_checkpoint_the_post( $post )
+{
+	apply_filters("debug", "Post: " . $post->post_title);
 }
 
 
