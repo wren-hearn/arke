@@ -1,4 +1,6 @@
 
+			<?php apply_filters("debug", "Footer start"); ?>
+
 		</div>  <!-- ./container -->
 
 		<?php wp_footer(); ?>
@@ -17,7 +19,6 @@
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-collapse.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-carousel.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-typeahead.js"></script>
-
 
 	</body>
 

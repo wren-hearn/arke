@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php apply_filters("debug", "Header start"); ?><!DOCTYPE html>
 <html>
 	<head>
 
@@ -23,17 +23,7 @@
 
 			<header>
 
-				<?php
-				$custom_header = get_custom_header();
-				if ( $custom_header->url != '')
-				{
-					/*
-					?>
-					<img src="<?php echo $custom_header->url; ?>" height="<?php echo $custom_header->height; ?>" width="<?php echo $custom_header->width; ?>" alt="" />
-					<?php
-					*/
-				}
-				?>
+				<?php $custom_header = get_custom_header(); ?>
 				<div class="site-header"<?php if($custom_header->url != ''): ?> style="background: url('<?php echo $custom_header->url; ?>'); height: <?php echo $custom_header->height; ?>px;"<?php endif; ?>>
 					<h2 class="site-header-title"><a href="<?php echo site_url('/'); ?>"><?php bloginfo('name'); ?></a></h2>
 					<p class="site-header-desc"><?php bloginfo('description'); ?></p>
@@ -42,16 +32,24 @@
 
 
 				<?php
-
-				$args = array(
-					'theme_location' => 'top-menu',
-					'container' => false,
-					'menu_class' => 'top-navigation-menu',
-					'fallback_cb' => 'sapphire_no_menu'
-				);
-
-				wp_nav_menu($args);
-
+				/* Main menu, cached with transient
+				-------------------------------------------------- */
+				global $theme_namespace;
+				if ( false === ( $menu = get_transient( $theme_namespace . '_top_menu' ) ) )
+				{
+					$args = array(
+						'theme_location' => 'top-menu',
+						'container' => false,
+						'menu_class' => 'top-navigation-menu',
+						'fallback_cb' => 'sapphire_no_menu',
+						'echo' => 0
+					);
+					$menu = wp_nav_menu($args);
+					set_transient( $theme_namespace . '_top_menu', $menu, WEEK_IN_SECONDS );
+				}
+				echo $menu;
 				?>
 
 			</header>
+
+			<?php apply_filters("debug", "Header end"); ?>
