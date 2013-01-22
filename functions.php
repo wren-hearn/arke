@@ -226,7 +226,7 @@ function sapphire_bust_menu_cache()
     delete_transient( $theme_namespace . '_top_menu' );
 }
 
-delete_transient( $theme_namespace . '_top_menu' );
+//delete_transient( $theme_namespace . '_top_menu' );
 //delete_transient( $theme_namespace . '_search_terms' );
 
 
