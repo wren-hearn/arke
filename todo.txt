@@ -7,6 +7,8 @@ favicon, iOS big icons
 
 learn how to compile LESS with node.js
 
+add icon/chevron to parents items of main menu (screen version)
+
 default sidebar content
 
 page templates
