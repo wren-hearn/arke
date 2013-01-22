@@ -13,49 +13,6 @@ if( !is_admin() )
 
 
 
-// Try and find a way to disable the default query on pages where we're
-// we're doing it all manually
-/*
-//add_filter( 'query_vars', 'disable_default_query' , 10, 1 );
-function disable_default_query( $query_vars )
-{
-	echo '<pre>';
-	print_r( $query_vars );
-	echo '</pre>';
-	return $query_vars;
-}
-
-function _cancel_query( $query ) {
-	if ( !is_admin() && !$query->is_feed() && $query->is_home() && $query->is_main_query() )
-	{
-		$query->init();
-		//$query->query_vars['posts_per_page'] = 0;
-		//echo '<pre>';
-		//print_r( $query );
-		//echo '</pre>';
-	}
-}
-add_action( 'pre_get_posts', '_cancel_query' );
-
-function pw_filter_query( $query ) {
-
-	//echo '<pre>';
-	//print_r( $query );
-	//echo '</pre>';
-	
-	if( $query->is_main_query() ) {
-		//echo "executed ";
-		//$query->init();
-		$query->set('meta_key', 'nonsense_meta_key');
-		$query->set('meta_value', 'cellar_door');
-		//$query->set( 'posts_per_page', 0 );
-	}
-}
-add_action('pre_get_posts', 'pw_filter_query', 9999);
-*/
-
-
-
 
 
 /* Theme Globals
@@ -125,18 +82,9 @@ if( !is_admin() )
 // Register the main menu
 register_nav_menu( 'top-menu', 'Top Menu' );
 
-function sapphire_no_menu( $args )
-{
-	?>
-		<div class="alert alert-error">
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-			<strong>No menus found!</strong> - Use <em>Appearance > Menus</em> to create a menu and assign it to this location.
-		</div>
-	<?php
-}
 
 // Add a CSS class to parents of submenus
-add_filter( 'wp_nav_menu_objects', 'sapphire_add_menu_parent_class' );
+//add_filter( 'wp_nav_menu_objects', 'sapphire_add_menu_parent_class' );
 function sapphire_add_menu_parent_class( $items )
 {
 	$parents = array();
@@ -155,6 +103,14 @@ function sapphire_add_menu_parent_class( $items )
 		}
 	}
 	return $items;
+}
+
+// Container wrapper for wp_pages_menu to normalize HTML structure with wp_nav_menu
+function sapphire_wp_page_menu()
+{
+
+	wp_page_menu();
+
 }
 
 
@@ -196,6 +152,21 @@ function wpfme_feed_post_thumbnail( $content )
 		$content = '<p>' . get_the_post_thumbnail($post->ID) . '</p>' . $content;
 	}
 	return $content;
+}
+
+// Custom walker to get flat lists of catagory and post_tag terms
+// to feed into Bootstrap's typeahead attribute for the search box
+class Plaintext_Cat_Walker extends Walker_Category
+{
+	function start_lvl( &$output, $depth = 0, $args = array() ) {}
+	function end_lvl( &$output, $depth = 0, $args = array() ) {}
+	function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 )
+	{
+		$output .= '"' . esc_attr( $category->name );
+	}
+	function end_el( &$output, $page, $depth = 0, $args = array() ) {
+		$output .= '", ';
+	}
 }
 
 
@@ -257,9 +228,8 @@ function sapphire_bust_menu_cache()
     delete_transient( $theme_namespace . '_top_menu' );
 }
 
-
 //delete_transient( $theme_namespace . '_top_menu' );
-
+//delete_transient( $theme_namespace . '_search_terms' );
 
 
 // Profiler tag

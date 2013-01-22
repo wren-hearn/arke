@@ -33,29 +33,8 @@
 				<?php get_search_form(); ?>
 
 
-				<?php
-				/* Main menu, cached with transient
-				-------------------------------------------------- */
-				/*
-				global $theme_namespace;
-				if ( false === ( $menu = get_transient( $theme_namespace . '_top_menu' ) ) )
-				{
-					$args = array(
-						'theme_location' => 'top-menu',
-						'container' => false,
-						'menu_class' => 'top-navigation-menu',
-						'fallback_cb' => 'sapphire_no_menu',
-						'echo' => 0
-					);
-					$menu = wp_nav_menu($args);
-					set_transient( $theme_namespace . '_top_menu', $menu, WEEK_IN_SECONDS );
-				}
-				echo $menu;
-				*/
-				?>
-
 				<nav id="site-navigation" class="main-navigation" role="navigation">
-					<h3 class="menu-toggle">Menu</h3>
+					<h3 class="menu-toggle">Menu <i class="icon-reorder"></i></h3>
 					<a class="hidden" href="#content" title="Skip to content">Skip to content</a>
 					<?php
 					/* Main menu, cached with transient
@@ -66,6 +45,7 @@
 						$args = array(
 							'theme_location' => 'top-menu',
 							'menu_class' => 'nav-menu',
+							'fallback_cb' => 'sapphire_wp_page_menu',
 							'echo' => 0
 						);
 						$menu = wp_nav_menu($args);

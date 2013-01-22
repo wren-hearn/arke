@@ -28,7 +28,7 @@
 		button.style.display = 'none';
 		return;
 	} else {
-		button.className += ' btn btn-large btn-block btn-primary';
+		button.className += ' btn btn-large btn-block';
 	}
 
 	button.onclick = function() {

@@ -5,12 +5,7 @@ theme screenshot
 
 favicon, iOS big icons
 
-clean up menu styles for desktop and mobile, conform to modular css
-
 learn how to compile LESS with node.js
-
-responsive and touch-friendly main menu (use anchor link in mobile to point to footer menu)
-	http://www.queness.com/post/13093/responsive-mobile-navigation-menumethods-and-solutions
 
 default sidebar content
 
@@ -44,8 +39,6 @@ homepage setup with option to select the categories the homepage draws from
 Post priority metadata to describe how important the content is (high, show as big as possible; medium, show with smaller thumb and headline; low, show headline only)
 
 category/tag pages which show highlights based on post priority
-
-search box typeahead using catagories/tabs list fed into bootstrap
 
 http://wp.smashingmagazine.com/2012/09/12/secrets-high-traffic-wordpress-blogs/
 
