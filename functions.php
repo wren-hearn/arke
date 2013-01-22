@@ -108,9 +108,7 @@ function sapphire_add_menu_parent_class( $items )
 // Container wrapper for wp_pages_menu to normalize HTML structure with wp_nav_menu
 function sapphire_wp_page_menu()
 {
-
 	wp_page_menu();
-
 }
 
 
