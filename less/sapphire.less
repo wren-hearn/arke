@@ -84,10 +84,18 @@ pre p { margin-bottom: 0; }
 /* Layout
 -------------------------------------------------- */
 
+@media screen and (max-width: 767px) {
+	body {
+		padding-left: (20px - @outer-padding);
+		padding-right: (20px - @outer-padding);
+	}
+}
+
 .container {
 	.transparent-container;
 	padding: @outer-padding;
 }
+
 .grid-preview { background-color: fadeout( black, 35% ); color: white; height: 2em; margin-bottom: 1em; margin-top: 1em; text-align: center; line-height: 2em; }
 
 
