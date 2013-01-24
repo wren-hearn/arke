@@ -1,5 +1,5 @@
 
-choose a new name for the theme and re-name test sites and code
+change theme name in code
 
 theme screenshot
 
@@ -44,8 +44,6 @@ category/tag pages which show highlights based on post priority
 
 http://wp.smashingmagazine.com/2012/09/12/secrets-high-traffic-wordpress-blogs/
 
-
-test change
 
 
 
