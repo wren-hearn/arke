@@ -7,6 +7,7 @@
 
 		<!-- JavaScript in footer to improve page loading speed -->
 
+		<!--
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-transition.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-alert.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-modal.js"></script>
@@ -19,6 +20,7 @@
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-collapse.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-carousel.js"></script>
 		<script src="<?php echo get_template_directory_uri(); ?>/js/bootstrap-typeahead.js"></script>
+		-->
 
 	</body>
 

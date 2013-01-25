@@ -5,13 +5,38 @@
 		<title><?php is_home() ? bloginfo('name') : wp_title(''); ?></title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" type="text/css" media="screen" />
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/font-awesome.css">
+		<!--  -->
 
-		<link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/less/bootstrap.less">
-		<link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/less/sapphire.less">
+		<?php global $use_compiled_css; if ( $use_compiled_css ): ?>
+			<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css">
+			<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/arke-compiled.css">
+		<?php else: ?>
+			<link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/less/arke.less">
+			<script src="<?php echo get_template_directory_uri(); ?>/js/less-1.3.1.min.js" type="text/javascript"></script>	
+		<?php endif; ?>
 
-		<script src="<?php echo get_template_directory_uri(); ?>/js/less-1.3.1.min.js" type="text/javascript"></script>
+
+		<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/img/favicon.ico" />
+		<link rel="apple-touch-icon" href="<?php echo get_template_directory_uri(); ?>/img/apple-touch-icon.png" />
+
+		<script type="text/javascript">
+			// Deferred Loading of JS
+			//https://developers.google.com/speed/docs/best-practices/payload#DeferLoadingJS
+
+			// Add a script element as a child of the body
+			function downloadJSAtOnload() {
+				var element = document.createElement("script");
+				element.src = "<?php echo get_template_directory_uri(); ?>/js/deferredfunctions.js";
+				document.body.appendChild(element);
+			}
+
+			// Check for browser support of event handling capability
+			if (window.addEventListener)
+				window.addEventListener("load", downloadJSAtOnload, false);
+			else if (window.attachEvent)
+				window.attachEvent("onload", downloadJSAtOnload);
+			else window.onload = downloadJSAtOnload;
+		</script>
 
 		<?php wp_head(); ?>
 
@@ -45,7 +70,7 @@
 						$args = array(
 							'theme_location' => 'top-menu',
 							'menu_class' => 'nav-menu',
-							'fallback_cb' => 'sapphire_wp_page_menu',
+							'fallback_cb' => 'arke_wp_page_menu',
 							'echo' => 0
 						);
 						$menu = wp_nav_menu($args);

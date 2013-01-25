@@ -11,6 +11,29 @@ if( !is_admin() )
 	add_filter('show_admin_bar', '__return_false');
 }
 
+// Remove unneeded widgets that have undesirable query overhead
+add_action( 'widgets_init', 'remove_unneeded_widgets' );
+function remove_unneeded_widgets() {
+	unregister_widget('WP_Widget_Pages');
+	unregister_widget('WP_Widget_Calendar');
+	unregister_widget('WP_Widget_Tag_Cloud');
+	unregister_widget('WP_Nav_Menu_Widget');
+	/*
+		WP_Widget_Pages                   = Pages Widget
+		WP_Widget_Calendar                = Calendar Widget
+		WP_Widget_Archives                = Archives Widget
+		WP_Widget_Links                   = Links Widget
+		WP_Widget_Meta                    = Meta Widget
+		WP_Widget_Search                  = Search Widget
+		WP_Widget_Text                    = Text Widget
+		WP_Widget_Categories              = Categories Widget
+		WP_Widget_Recent_Posts            = Recent Posts Widget
+		WP_Widget_Recent_Comments         = Recent Comments Widget
+		WP_Widget_RSS                     = RSS Widget
+		WP_Widget_Tag_Cloud               = Tag Cloud Widget
+		WP_Nav_Menu_Widget                = Menus Widget
+	*/
+}
 
 
 
@@ -18,7 +41,11 @@ if( !is_admin() )
 /* Theme Globals
 -------------------------------------------------- */
 global $theme_namespace;
-$theme_namespace = 'sapphire';
+$theme_namespace = 'arke';
+
+// Use client-side LESS sheets or use compiled CSS
+global $use_compiled_css;
+$use_compiled_css = true;
 
 // Set a maximum width for Oembedded objects
 if ( ! isset( $content_width ) )
@@ -61,13 +88,38 @@ add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', '
 -------------------------------------------------- */
 if( !is_admin() )
 {
-	add_action('wp_enqueue_scripts', 'sapphire_script_setup');
-	function sapphire_script_setup()
+	add_action('wp_enqueue_scripts', 'arke_script_setup');
+	function arke_script_setup()
 	{
 		wp_enqueue_script(
-			'sapphire',
-			get_template_directory_uri() . '/js/combined.js',
+			'arke-combined',
+			get_template_directory_uri() . '/js/arke-combined.js',
 			array(),  // no deps
+			False,  // no version
+			True  // load in footer
+		);
+	}
+
+	// Form helper scripts
+	//add_action('wp_enqueue_scripts', 'arke_form_helper_scripts');
+	function arke_form_helper_scripts()
+	{
+		// No fuss form validation
+		// http://parsleyjs.org/
+		wp_enqueue_script(
+			'arke-combined',
+			get_template_directory_uri() . '/js/parsley.min.js',  
+			array('jquery'),  // dep
+			False,  // no version
+			True  // load in footer
+		);
+
+		// LocalStorage for form contents
+		// http://garlicjs.org/
+		wp_enqueue_script(
+			'arke-combined',
+			get_template_directory_uri() . '/js/garlic.min.js',  
+			array('jquery'),  // dep
 			False,  // no version
 			True  // load in footer
 		);
@@ -84,8 +136,8 @@ register_nav_menu( 'top-menu', 'Top Menu' );
 
 
 // Add a CSS class to parents of submenus
-//add_filter( 'wp_nav_menu_objects', 'sapphire_add_menu_parent_class' );
-function sapphire_add_menu_parent_class( $items )
+//add_filter( 'wp_nav_menu_objects', 'arke_add_menu_parent_class' );
+function arke_add_menu_parent_class( $items )
 {
 	$parents = array();
 	foreach ( $items as $item )
@@ -106,7 +158,7 @@ function sapphire_add_menu_parent_class( $items )
 }
 
 // Container wrapper for wp_pages_menu to normalize HTML structure with wp_nav_menu
-function sapphire_wp_page_menu()
+function arke_wp_page_menu()
 {
 	wp_page_menu();
 }
@@ -116,8 +168,8 @@ function sapphire_wp_page_menu()
 /* Sidebar
 -------------------------------------------------- */
 
-add_filter( 'widgets_init', 'sapphire_register_sidebar' );
-function sapphire_register_sidebar()
+add_filter( 'widgets_init', 'arke_register_sidebar' );
+function arke_register_sidebar()
 {
 	global $theme_namespace;
 	$args = array(
@@ -171,30 +223,6 @@ class Plaintext_Cat_Walker extends Walker_Category
 /* Performance Improvements and Monitoring
 -------------------------------------------------- */
 
-// Remove unneeded widgets that have undesirable query overhead
-add_action( 'widgets_init', 'remove_unneeded_widgets' );
-function remove_unneeded_widgets() {
-	unregister_widget('WP_Widget_Pages');
-	unregister_widget('WP_Widget_Calendar');
-	unregister_widget('WP_Widget_Tag_Cloud');
-	unregister_widget('WP_Nav_Menu_Widget');
-	/*
-		WP_Widget_Pages                   = Pages Widget
-		WP_Widget_Calendar                = Calendar Widget
-		WP_Widget_Archives                = Archives Widget
-		WP_Widget_Links                   = Links Widget
-		WP_Widget_Meta                    = Meta Widget
-		WP_Widget_Search                  = Search Widget
-		WP_Widget_Text                    = Text Widget
-		WP_Widget_Categories              = Categories Widget
-		WP_Widget_Recent_Posts            = Recent Posts Widget
-		WP_Widget_Recent_Comments         = Recent Comments Widget
-		WP_Widget_RSS                     = RSS Widget
-		WP_Widget_Tag_Cloud               = Tag Cloud Widget
-		WP_Nav_Menu_Widget                = Menus Widget
-	*/
-}
-
 // Profiler checkpoints
 add_action( 'wp_loaded', 'set_checkpoint_wp_loaded' );
 function set_checkpoint_wp_loaded()
@@ -219,8 +247,8 @@ function set_checkpoint_the_post( $post )
 /* Transient Cache Busts
 -------------------------------------------------- */
 
-add_action( 'wp_update_nav_menu', 'sapphire_bust_menu_cache' );
-function sapphire_bust_menu_cache()
+add_action( 'wp_update_nav_menu', 'arke_bust_menu_cache' );
+function arke_bust_menu_cache()
 {
 	global $theme_namespace;
     delete_transient( $theme_namespace . '_top_menu' );

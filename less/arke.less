@@ -1,4 +1,6 @@
-/*
+
+/* Layout Dimensions
+--------------------------------------------------
 
 |------------------------------1170px---------------------------------|
 Two-column full-width viewport diagram
@@ -221,11 +223,10 @@ pre p { margin-bottom: 0; }
 /* Big Post Excerpt Module
 -------------------------------------------------- */
 
-.full-excerpt{
-	& + & {
+.full-excerpt{ }
+	.full-excerpt + .full-excerpt {
 		margin-top: @outer-padding;
 	}
-}
 	.full-excerpt-inset {
 		.box-sizing( border-box );
 		overflow: auto;
