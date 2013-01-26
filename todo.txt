@@ -6,6 +6,8 @@ default sidebar content
 
 page templates
 
+background color support
+
 alternate compact templates for post formats
 
 catfish custom post type (use meerkat for animation?)
