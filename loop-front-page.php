@@ -14,7 +14,7 @@ if ( have_posts() )
 
 		$presentation = get_post_meta( get_the_ID(), '_arke_presentation', true );
 
-		if ( $presentation == '' )
+		if ( $presentation === '' )
 		{
 			// Defaults
 			$presentation = array(
@@ -23,6 +23,7 @@ if ( have_posts() )
 				'excerpt' => 'no'
 			);
 		}
+
 
 		// Start buffering
 		ob_start();
@@ -41,10 +42,10 @@ if ( have_posts() )
 			if( false === $post_format )
 			{
 				// Standard post
-				if( $presentation['thumbnail'] == 'no' || ! has_post_thumbnail() )
-					get_template_part( 'format', 'standard' );
-				else
+				if( $presentation['thumbnail'] === 'yes' && has_post_thumbnail() )
 					get_template_part( 'format', 'standard-home' );
+				else
+					get_template_part( 'format', 'standard' );
 			}
 			else
 			{
@@ -128,8 +129,8 @@ Total After Split: <?php echo count($col1) + count($col2) + count($col1); ?>
 
 Elements Recombined: <?php
 $agg = $col1 + $col2 + $col3;
-foreach( array_keys( $agg ) as $e )
-	echo $e . ' ';
+foreach( $agg as $k => $v )
+	echo $k . ' ' . $v['presentation']['thumbnail'] . ' ';
 ?>
 		</pre>
 

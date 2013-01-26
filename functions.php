@@ -308,7 +308,15 @@ function arke_insert_thumbnail( &$col, $colspan = '5' )
 	foreach( $col as &$p )
 	{
 		// Skip posts that don't need or want a thumbnail
-		if( false !== get_post_format( $p['id'] ) || $presentation['thumbnail'] == 'no' || ! has_post_thumbnail( $p['id'] ) )
+		//if( false !== get_post_format( $p['id'] ) || $p['presentation']['thumbnail'] === 'no' || ! has_post_thumbnail( $p['id'] ) )
+		//	continue;
+		if( false !== get_post_format( $p['id'] ) )
+			continue;
+
+		if( $p['presentation']['thumbnail'] === 'no' )
+			continue;
+
+		if( ! has_post_thumbnail( $p['id'] ) )
 			continue;
 
 		// NOT INSIDE THE LOOP HERE

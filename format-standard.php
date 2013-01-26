@@ -1,4 +1,7 @@
 <?php
+
+// This spot needs the presentation logic
+
 if ( has_post_thumbnail() )
 {
 	?>
