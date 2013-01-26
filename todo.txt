@@ -28,6 +28,10 @@ framework for prefetch and ad serving that supports multiple profiles to load ba
 homepage layout which allows for mix of image/content/lists/carousels. maybe have a top bucket for newest content, then one for key categories, and fill out the rest with the last week of material with a day per row of elements
 	add option to hide from homepage?
 	priority option to push elements left (important) or right (unimportant)?
+	I GOT IT LOL
+		sort before column split by priority
+		sort after column split by reverse chronological but GROUP BY DAY, not absolute time, so more important stories will still be above others despite publishing order
+		horizontal axis is importance, vertical axis is freshness
 
 
 Ubiquitous use of WordPress transients API to minimize queries
