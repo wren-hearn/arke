@@ -1,11 +1,10 @@
-
 <?php
 if ( has_post_thumbnail() )
 {
 	?>
 	<?php if( !is_single() ): ?><a href="<?php the_permalink(); ?>" class="full-excerpt-thumbnail-link"><?php endif; ?>
 		<span class="full-excerpt-post-thumbnail" style="background-image: url('<?php
-		$image_meta = wp_get_attachment_image_src( get_post_thumbnail_id(), 'big-thumbnail' );
+		$image_meta = wp_get_attachment_image_src( get_post_thumbnail_id(), '8-col-thumb' );
 		echo $image_meta[0];
 		?>');">
 			<h1><?php the_title(); ?></h1>

@@ -45,7 +45,7 @@ $theme_namespace = 'arke';
 
 // Use client-side LESS sheets or use compiled CSS
 global $use_compiled_css;
-$use_compiled_css = true;
+$use_compiled_css = false;
 
 // Set a maximum width for Oembedded objects
 if ( ! isset( $content_width ) )
@@ -76,8 +76,19 @@ add_theme_support( 'custom-header',
 
 // Post thumbnails
 add_theme_support( 'post-thumbnails' );
-set_post_thumbnail_size( 9999, 200, true );
-add_image_size( 'big-thumbnail', 770, 200, true );
+set_post_thumbnail_size( 770, 200, true ); // default Post Thumbnail dimensions   
+
+add_image_size( '2-col-thumb', 170, 200, true );
+add_image_size( '3-col-thumb', 270, 200, true );
+add_image_size( '4-col-thumb', 370, 200, true );
+add_image_size( '5-col-thumb', 470, 200, true );
+add_image_size( '6-col-thumb', 570, 200, true );
+add_image_size( '7-col-thumb', 670, 200, true );
+add_image_size( '8-col-thumb', 770, 200, true );
+
+
+
+
 
 // All post formats
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' ) );

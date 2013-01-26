@@ -1,14 +1,17 @@
 <?php apply_filters("debug", "Header start"); ?><!DOCTYPE html>
 <html>
 	<head>
-
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        
 		<title><?php is_home() ? bloginfo('name') : wp_title(''); ?></title>
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!--  -->
+        <meta name="description" content="">
+
+		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css">
 
 		<?php global $use_compiled_css; if ( $use_compiled_css ): ?>
-			<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/bootstrap.css">
 			<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/arke-compiled.css">
 		<?php else: ?>
 			<link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/less/arke.less">
@@ -97,6 +100,27 @@
 				<div class="span1 grid-preview">12</div>
 			</div>
 
-			
+			<div class="row">
+				<div class="span2 grid-preview">2</div>
+				<div class="span3 grid-preview">3</div>
+				<div class="span4 grid-preview">4</div>
+				<div class="span3 grid-preview">3</div>
+			</div>
+
+			<div class="row">
+				<div class="span5 grid-preview">5</div>
+				<div class="span6 grid-preview">6</div>
+				<div class="span1 grid-preview">1</div>
+			</div>
+
+			<div class="row">
+				<div class="span7 grid-preview">7</div>
+				<div class="span5 grid-preview">5</div>
+			</div>
+
+			<div class="row">
+				<div class="span8 grid-preview">8</div>
+				<div class="span4 grid-preview">4</div>
+			</div>
 
 			<?php apply_filters("debug", "Header end"); ?>

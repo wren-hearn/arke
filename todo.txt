@@ -20,6 +20,8 @@ serve images scaled to their appropriate size
 lazy load images below the fold or expensive and less-important
 	http://css-tricks.com/snippets/javascript/lazy-loading-images/
 
+Use thumbnail height based on column placement, not fixed
+
 framework for prefetch and ad serving that supports multiple profiles to load based on screen size (preferably javascript)
 	http://www.quirksmode.org/blog/archives/2010/08/combining_media.html
 	http://css-tricks.com/enquire-js-media-query-callbacks-in-javascript/
