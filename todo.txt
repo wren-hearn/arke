@@ -1,7 +1,8 @@
 
-learn how to compile LESS with node.js
+learn how to compile LESS with node.js automatically as part of commits
 
 default sidebar content
+	login/forgot password/register
 
 page templates
 
@@ -25,12 +26,13 @@ framework for prefetch and ad serving that supports multiple profiles to load ba
 	http://wicky.nillia.ms/enquire.js/
 
 homepage layout which allows for mix of image/content/lists/carousels. maybe have a top bucket for newest content, then one for key categories, and fill out the rest with the last week of material with a day per row of elements
+	add option to hide from homepage?
+	priority option to push elements left (important) or right (unimportant)?
+
 
 Ubiquitous use of WordPress transients API to minimize queries
 
 homepage setup with option to select the categories the homepage draws from
-
-Post priority metadata to describe how important the content is (high, show as big as possible; medium, show with smaller thumb and headline; low, show headline only)
 
 category/tag pages which show highlights based on post priority
 
@@ -40,7 +42,7 @@ http://wp.smashingmagazine.com/2012/09/12/secrets-high-traffic-wordpress-blogs/
 
 For child themes:
 
-re-do form validation using Parsley
+re-do form validation using Parsley and Garlic
 	http://parsleyjs.org/
 
 

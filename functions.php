@@ -181,6 +181,128 @@ function arke_register_sidebar()
 }
 
 
+
+/* Post Presentation Meta Box
+-------------------------------------------------- */
+
+// Register the meta box
+add_action( 'add_meta_boxes', 'arke_presentation_meta_box_setup', 0 );  // 1 to ensure high priority
+function arke_presentation_meta_box_setup()
+{
+	add_meta_box(
+		'arke-presentation-meta-box',  // div id for meta box
+		'Presentation',  // Title of metabox
+		'arke_presentation_meta_box_display',  // HTML display callback
+		'post',  // post type meta box applies to
+		'side',  // context on the page
+		'core'  // priority within the column of meta boxes
+	);
+}
+
+// Display the HTML for the meta box
+function arke_presentation_meta_box_display( $post )
+{
+	// Use nonce for verification
+	wp_nonce_field( 'arke_presentation_meta_box_action', 'arke_presentation_meta_box_nonce' );
+
+	$presentation = get_post_meta( $post->ID, '_arke_presentation', true );
+
+	if ( $presentation == '' )
+	{
+		// Defaults
+		$presentation = array(
+			'size' => 'normal',
+			'thumbnail' => 'yes',
+			'excerpt' => 'no'
+		);
+	}
+	?>
+	<table class="form-table">
+		<tr>
+			<td valign="top">Display Size</td>
+			<td valign="top">
+				<fieldset>
+					<select name="arke_size" id="arke-size">
+						<option <?php selected( $presentation['size'], 'big' ); ?> value="big">Big</option>
+						<option <?php selected( $presentation['size'], 'normal' ); ?> value="normal">Normal</option>
+						<option <?php selected( $presentation['size'], 'compact' ); ?> value="compact">Compact</option>
+					</select>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Display Featured Image</td>
+			<td valign="top">
+				<fieldset>
+					<label title='Yes'><input type="radio" name="arke_thumbnail" <?php checked( $presentation['thumbnail'], 'yes' ); ?> value="yes" /> <span>Yes</span></label><br />
+					<label title='No'><input type="radio" name="arke_thumbnail" <?php checked( $presentation['thumbnail'], 'no' ); ?> value="no" /> <span>No</span></label>
+				</fieldset>
+			</td>
+		</tr>
+		<tr>
+			<td valign="top">Display Excerpt</td>
+			<td valign="top">
+				<fieldset>
+					<label title='Yes'><input type="radio" name="arke_excerpt" <?php checked( $presentation['excerpt'], 'yes' ); ?> value="yes" /> <span>Yes</span></label><br />
+					<label title='No'><input type="radio" name="arke_excerpt" <?php checked( $presentation['excerpt'], 'no' ); ?> value="no" /> <span>No</span></label>
+				</fieldset>
+			</td>
+		</tr>
+	</table>
+	<?php
+}
+
+// Save presentation information
+add_action( 'save_post', 'arke_presentation_save' );
+function arke_presentation_save( $post_id )
+{
+
+	// verify if this is an auto save routine. 
+	// If it is our form has not been submitted, so we dont want to do anything
+	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
+		return;
+
+	// verify this came from the our screen and with proper authorization,
+	// because save_post can be triggered at other times
+	if ( !wp_verify_nonce( $_POST['arke_presentation_meta_box_nonce'], 'arke_presentation_meta_box_action' ) )
+		return;
+
+	// Check permissions
+	if ( !current_user_can( 'edit_post', $post_id ) )
+		return;
+
+	// OK, we're authenticated: we need to find and save the data
+	$presentation = array(
+		'size' => '',
+		'thumbnail' => '',
+		'excerpt' => ''
+	);
+		
+	//sanitize user input
+	$presentation['size'] = sanitize_text_field( $_POST['arke_size'] );
+	$presentation['thumbnail'] = sanitize_text_field( $_POST['arke_thumbnail'] );
+	$presentation['excerpt'] = sanitize_text_field( $_POST['arke_excerpt'] );
+
+	update_post_meta( $post_id, '_arke_presentation', $presentation );
+}
+
+
+
+/* Post Presentation Helper Functions
+-------------------------------------------------- */
+
+function arke_output_column( $col )
+{
+	// Sanity check
+	if ( ! is_array( $col ) )
+		return;
+
+	foreach( $col as $buffered_post )
+		echo $buffered_post['html'];
+}
+
+
+
 /* Miscellaneous Tweaks
 -------------------------------------------------- */
 
