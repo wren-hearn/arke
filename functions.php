@@ -302,6 +302,46 @@ function arke_presentation_save( $post_id )
 /* Post Presentation Helper Functions
 -------------------------------------------------- */
 
+// Insert thumbnail code
+function arke_insert_thumbnail( &$col, $colspan = '5' )
+{
+	foreach( $col as &$p )
+	{
+		// Skip posts that don't need or want a thumbnail
+		if( false === get_post_format( $p['id'] || $presentation['thumbnail'] == 'no' || ! has_post_thumbnail( $p['id'] ) ) )
+			continue;
+
+		// NOT INSIDE THE LOOP HERE
+		
+		// Start buffering again
+		ob_start();
+		?>
+		<a href="<?php echo get_permalink( $p['id'] ); ?>" class="full-excerpt-thumbnail-link">
+			<span class="full-excerpt-post-thumbnail" style="background-image: url('<?php
+			$image_meta = wp_get_attachment_image_src( get_post_thumbnail_id( $p['id'] ), $colspan . '-col-thumb' );
+			echo $image_meta[0];
+			?>');">
+				<h1><?php echo get_the_title( $p['id'] ); ?></h1>
+			</span>
+		</a>
+
+		<div class="full-excerpt-inset">
+		<?php
+		$p['html_thumbnail'] = ob_get_contents();
+		ob_end_clean();
+	}
+}
+
+// Reassemble the blocks
+function arke_reassemble_html( &$col )
+{
+	foreach( $col as &$p )
+	{
+		$p['html'] = $p['html_head'] . $p['html_thumbnail'] . $p['html_body'];
+	}
+}
+
+// Loop through a column
 function arke_output_column( $col )
 {
 	// Sanity check
