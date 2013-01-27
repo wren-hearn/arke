@@ -24,6 +24,7 @@ lazy load images below the fold or expensive and less-important
 
 Use thumbnail height based on column placement, not fixed
 
+
 framework for prefetch and ad serving that supports multiple profiles to load based on screen size (preferably javascript)
 	http://www.quirksmode.org/blog/archives/2010/08/combining_media.html
 	http://css-tricks.com/enquire-js-media-query-callbacks-in-javascript/
@@ -36,7 +37,6 @@ homepage layout which allows for mix of image/content/lists/carousels. maybe hav
 		sort before column split by priority
 		sort after column split by reverse chronological but GROUP BY DAY, not absolute time, so more important stories will still be above others despite publishing order
 		horizontal axis is importance, vertical axis is freshness
-
 
 Ubiquitous use of WordPress transients API to minimize queries
 
@@ -53,4 +53,5 @@ For child themes:
 re-do form validation using Parsley and Garlic
 	http://parsleyjs.org/
 
-
+tour
+	http://sorich87.github.com/bootstrap-tour/index.html
