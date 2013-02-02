@@ -22,8 +22,17 @@ serve images scaled to their appropriate size
 lazy load images below the fold or expensive and less-important
 	http://css-tricks.com/snippets/javascript/lazy-loading-images/
 
+For small columns, reload images to fill space in mobile layout? Lazy load all post thumbnails and let javascript figure out which to load?
+
 Use thumbnail height based on column placement, not fixed
 
+Use array_chunk to split post array between columns
+
+Put latest twitter post(s?) on homepage with pic of author like BBC world news
+
+Replace Jetpack
+	Use post importance to populate "most popular posts" module
+	Find super lightweight way to do the same video/audio embed
 
 framework for prefetch and ad serving that supports multiple profiles to load based on screen size (preferably javascript)
 	http://www.quirksmode.org/blog/archives/2010/08/combining_media.html
@@ -46,6 +55,10 @@ category/tag pages which show highlights based on post priority
 
 http://wp.smashingmagazine.com/2012/09/12/secrets-high-traffic-wordpress-blogs/
 
+fuck with queries?
+	http://scotty-t.com/2012/01/30/understanding-mysql-in-wordpress/
+
+	
 
 
 For child themes:

@@ -36,6 +36,25 @@ function remove_unneeded_widgets() {
 }
 
 
+/*
+// Modify default query on homepage
+add_action( 'pre_get_posts', 'arke_modify_homepage_query' );
+function arke_modify_homepage_query( $query )
+{
+	if ( $query->is_home() )
+	{
+		$query->query_vars['no_found_rows'] = true;
+		$query->query_vars['update_post_meta_cache'] = false;
+		$query->query_vars['update_post_term_cache'] = false;
+	}
+}
+*/
+
+
+
+
+
+
 
 
 /* Theme Globals
