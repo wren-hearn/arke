@@ -1,23 +1,7 @@
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
-	<div id="post-<?php the_ID(); ?>" <?php post_class('full-excerpt'); ?>>
-
-		<?php
-		$post_format = get_post_format();
-		if( false === $post_format )
-		{
-			// Standard post
-			get_template_part( 'format', 'standard' );
-		}
-		else
-		{
-			// Load specialized post format
-			get_template_part( 'format', $post_format );
-		}
-		?>
-
-	</div>
+	<?php include(locate_template('post.php')); ?>
 
 <?php endwhile; else: ?>
 

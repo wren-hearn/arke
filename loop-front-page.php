@@ -1,72 +1,61 @@
 <?php
 
-$buffered_posts = array();
-
 // Plain old loop, but buffer the output and save it
 // to an array along with presentation information.
 // After doing a rough measurement and prioritization of posts,
 // we'll split the output between a few columns and echo the output
 if ( have_posts() )
 {
+	$cols = array();
+
+	// Get the post count
+	global $wp_query;
+	$post_count = $wp_query->post_count;
+
+	// Layout of the page (one element per column, value is the grid columns it spans)
+	$layout = array( 5, 3, 4 );
+
+	$column_count = count( $layout );
+	for ( $i = 0; $i <= $column_count; $i++ )
+	{
+		$cols[$i] = array();
+	}
+
+	$posts_per_column = ceil( $post_count / $column_count );
+	$column_index = 0;
+	
 	while ( have_posts() )
 	{
 		the_post();
 
-		$presentation = get_post_meta( get_the_ID(), '_arke_presentation', true );
+		$presentation = arke_get_presentation();
 
-		if ( $presentation === '' )
-		{
-			// Defaults
-			$presentation = array(
-				'size' => 'normal',
-				'thumbnail' => 'yes',
-				'excerpt' => 'no'
-			);
-		}
-
+		// Set layout variable for thumbnails
+		$colspan = $layout[$column_index];
 
 		// Start buffering
 		ob_start();
 		?>
 
-		<div id="post-<?php the_ID(); ?>" <?php post_class('full-excerpt'); ?>>
-			<?php
-			// Gather the first chunk of the html block
-			$post_head = ob_get_contents();
-			ob_end_clean();
-
-			// Start buffering again
-			ob_start();
-			
-			$post_format = get_post_format();
-			if( false === $post_format )
-			{
-				// Standard post
-				if( $presentation['thumbnail'] === 'yes' && has_post_thumbnail() )
-					get_template_part( 'format', 'standard-home' );
-				else
-					get_template_part( 'format', 'standard' );
-			}
-			else
-			{
-				// Load specialized post format
-				get_template_part( 'format', $post_format );
-			}
-			?>
-		</div>
+		<?php include(locate_template('post.php')); ?>
 
 		<?php
 		// Gather the second chunk of the html block
 		$post_body = ob_get_contents();
 		ob_end_clean();
 
-		$buffered_posts[] = array(
-			'html' => '',
-			'html_head' => $post_head,
-			'html_thumbnail' => '',
-			'html_body' => $post_body,
+		// Column housekeeping
+		if ( count( $cols[$column_index] ) >= $posts_per_column && $column_index + 1 != $column_count )
+		{
+			// Increment
+			$column_index += 1;
+		}
+
+		$cols[$column_index][] = array(
+			'html' => $post_body,
 			'presentation' => $presentation,
-			'id' => get_the_ID()
+			'date' => get_the_date( 'm-d' ),
+			'importance' => 0
 		);
 		
 	}
@@ -88,30 +77,6 @@ else
 
 
 
-$i = round( count($buffered_posts) / 4 );
-$col1 = array_slice( $buffered_posts, 0, $i, true );
-
-$i = round( ( count($buffered_posts) - count($col1) ) / 2 );
-$col2 = array_slice( $buffered_posts, count($col1), $i, true );
-
-$col3 = array_slice( $buffered_posts, count($col1) + count($col2), NULL, true );
-
-
-
-
-arke_insert_thumbnail( $col1, '5' );
-arke_insert_thumbnail( $col2, '3' );
-arke_insert_thumbnail( $col3, '4' );
-
-
-
-arke_reassemble_html( $col1 );
-arke_reassemble_html( $col2 );
-arke_reassemble_html( $col3 );
-
-// Now that we know where to place things, go back and get the correctly-
-// sized thumbnails and surrounding 
-
 
 ?>
 
@@ -123,12 +88,14 @@ arke_reassemble_html( $col3 );
 	<div class="span12">
 
 		<pre>
-Total Before Split: <?php echo count($buffered_posts); ?>
+Posts Per Column: <?php echo $posts_per_column; ?>
+			
+Total Before Split: <?php echo $post_count; ?>
 
-Total After Split: <?php echo count($col1) + count($col2) + count($col1); ?>
+Total After Split: <?php echo count($cols[0]) + count($cols[1]) + count($cols[2]); ?>
 
 Elements Recombined: <?php
-$agg = $col1 + $col2 + $col3;
+$agg = $cols[0] + $cols[1] + $cols[2];
 foreach( $agg as $k => $v )
 	echo $k . ' ' . $v['presentation']['thumbnail'] . ' ';
 ?>
@@ -137,15 +104,15 @@ foreach( $agg as $k => $v )
 	</div>
 
 	<div class="span5">
-		<?php arke_output_column( $col1 ); ?>
+		<?php arke_output_column( $cols[0] ); ?>
 	</div>
 
 	<div class="span3">
-		<?php arke_output_column( $col2 ); ?>
+		<?php arke_output_column( $cols[1] ); ?>
 	</div>
 
 	<div class="span4">
-		<?php arke_output_column( $col3 ); ?>
+		<?php arke_output_column( $cols[2] ); ?>
 	</div>
 
 </div>

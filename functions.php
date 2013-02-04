@@ -36,26 +36,6 @@ function remove_unneeded_widgets() {
 }
 
 
-/*
-// Modify default query on homepage
-add_action( 'pre_get_posts', 'arke_modify_homepage_query' );
-function arke_modify_homepage_query( $query )
-{
-	if ( $query->is_home() )
-	{
-		$query->query_vars['no_found_rows'] = true;
-		$query->query_vars['update_post_meta_cache'] = false;
-		$query->query_vars['update_post_term_cache'] = false;
-	}
-}
-*/
-
-
-
-
-
-
-
 
 /* Theme Globals
 -------------------------------------------------- */
@@ -64,7 +44,7 @@ $theme_namespace = 'arke';
 
 // Use client-side LESS sheets or use compiled CSS
 global $use_compiled_css;
-$use_compiled_css = false;
+$use_compiled_css = true;
 
 // Set a maximum width for Oembedded objects
 if ( ! isset( $content_width ) )
@@ -95,8 +75,20 @@ add_theme_support( 'custom-header',
 
 // Post thumbnails
 add_theme_support( 'post-thumbnails' );
-set_post_thumbnail_size( 770, 200, true ); // default Post Thumbnail dimensions   
 
+/* Bootstrap with no gutters */
+set_post_thumbnail_size( 770, 200, true ); // default Post Thumbnail dimensions   
+add_image_size( '2-col-thumb', 195, 200, true );
+add_image_size( '3-col-thumb', 293, 200, true );
+add_image_size( '4-col-thumb', 390, 200, true );
+add_image_size( '5-col-thumb', 488, 200, true );
+add_image_size( '6-col-thumb', 585, 200, true );
+add_image_size( '7-col-thumb', 683, 200, true );
+add_image_size( '8-col-thumb', 780, 200, true );
+
+/* Default Bootstrap grid content */
+/*
+set_post_thumbnail_size( 770, 200, true ); // default Post Thumbnail dimensions   
 add_image_size( '2-col-thumb', 170, 200, true );
 add_image_size( '3-col-thumb', 270, 200, true );
 add_image_size( '4-col-thumb', 370, 200, true );
@@ -104,7 +96,7 @@ add_image_size( '5-col-thumb', 470, 200, true );
 add_image_size( '6-col-thumb', 570, 200, true );
 add_image_size( '7-col-thumb', 670, 200, true );
 add_image_size( '8-col-thumb', 770, 200, true );
-
+*/
 
 
 
@@ -235,17 +227,7 @@ function arke_presentation_meta_box_display( $post )
 	// Use nonce for verification
 	wp_nonce_field( 'arke_presentation_meta_box_action', 'arke_presentation_meta_box_nonce' );
 
-	$presentation = get_post_meta( $post->ID, '_arke_presentation', true );
-
-	if ( $presentation == '' )
-	{
-		// Defaults
-		$presentation = array(
-			'size' => 'normal',
-			'thumbnail' => 'yes',
-			'excerpt' => 'no'
-		);
-	}
+	$presentation = arke_get_presentation( $post->ID );
 	?>
 	<table class="form-table">
 		<tr>
@@ -321,53 +303,6 @@ function arke_presentation_save( $post_id )
 /* Post Presentation Helper Functions
 -------------------------------------------------- */
 
-// Insert thumbnail code
-function arke_insert_thumbnail( &$col, $colspan = '5' )
-{
-	foreach( $col as &$p )
-	{
-		// Skip posts that don't need or want a thumbnail
-		//if( false !== get_post_format( $p['id'] ) || $p['presentation']['thumbnail'] === 'no' || ! has_post_thumbnail( $p['id'] ) )
-		//	continue;
-		if( false !== get_post_format( $p['id'] ) )
-			continue;
-
-		if( $p['presentation']['thumbnail'] === 'no' )
-			continue;
-
-		if( ! has_post_thumbnail( $p['id'] ) )
-			continue;
-
-		// NOT INSIDE THE LOOP HERE
-		
-		// Start buffering again
-		ob_start();
-		?>
-		<a href="<?php echo get_permalink( $p['id'] ); ?>" class="full-excerpt-thumbnail-link">
-			<span class="full-excerpt-post-thumbnail" style="background-image: url('<?php
-			$image_meta = wp_get_attachment_image_src( get_post_thumbnail_id( $p['id'] ), $colspan . '-col-thumb' );
-			echo $image_meta[0];
-			?>');">
-				<h1><?php echo get_the_title( $p['id'] ); ?></h1>
-			</span>
-		</a>
-
-		<div class="full-excerpt-inset">
-		<?php
-		$p['html_thumbnail'] = ob_get_contents();
-		ob_end_clean();
-	}
-}
-
-// Reassemble the blocks
-function arke_reassemble_html( &$col )
-{
-	foreach( $col as &$p )
-	{
-		$p['html'] = $p['html_head'] . $p['html_thumbnail'] . $p['html_body'];
-	}
-}
-
 // Loop through a column
 function arke_output_column( $col )
 {
@@ -378,6 +313,46 @@ function arke_output_column( $col )
 	foreach( $col as $buffered_post )
 		echo $buffered_post['html'];
 }
+
+// Retrieve presentation information or return defaults
+function arke_get_presentation( $id = false )
+{
+	// Must be used in the loop if no post id is passed
+	if( ! $id )
+		$id = get_the_ID();
+		
+	$presentation = get_post_meta( $id, '_arke_presentation', true );
+
+	if ( $presentation === '' )
+	{
+		// Defaults
+		$presentation = array(
+			'size' => 'normal',
+			'thumbnail' => 'yes',
+			'excerpt' => 'yes'
+		);
+	}
+
+	return $presentation;
+}
+
+
+/* Global query modifications to order by importance
+-------------------------------------------------- */
+/*
+// Modify default query on homepage
+add_action( 'pre_get_posts', 'arke_sort_query_by_importance' );
+function arke_sort_query_by_importance( $query )
+{
+	if ( $query->is_home() )
+	{
+		$query->query_vars['no_found_rows'] = true;
+		$query->query_vars['update_post_meta_cache'] = false;
+		$query->query_vars['update_post_term_cache'] = false;
+	}
+}
+*/
+
 
 
 
