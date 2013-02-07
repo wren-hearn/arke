@@ -28,6 +28,7 @@ if ( have_posts() )
 	{
 		the_post();
 
+		$importance = arke_get_importance();
 		$presentation = arke_get_presentation();
 
 		// Set layout variable for thumbnails
@@ -53,9 +54,9 @@ if ( have_posts() )
 
 		$cols[$column_index][] = array(
 			'html' => $post_body,
+			'importance' => $importance,
 			'presentation' => $presentation,
-			'date' => get_the_date( 'm-d' ),
-			'importance' => 0
+			'date' => get_the_date( 'Y-m-d' )
 		);
 		
 	}

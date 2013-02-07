@@ -228,8 +228,29 @@ function arke_presentation_meta_box_display( $post )
 	wp_nonce_field( 'arke_presentation_meta_box_action', 'arke_presentation_meta_box_nonce' );
 
 	$presentation = arke_get_presentation( $post->ID );
+	$importance = arke_get_importance( $post->ID );
+
 	?>
 	<table class="form-table">
+		<tr>
+			<td valign="top">Importance</td>
+			<td valign="top">
+				<fieldset>
+					<select name="arke_importance" id="arke_importance">
+						<option <?php selected( $importance, '10' ); ?> value="10">SETI</option>
+						<option <?php selected( $importance, '9' ); ?> value="9">Burning Bush</option>
+						<option <?php selected( $importance, '8' ); ?> value="8">Flare Gun</option>
+						<option <?php selected( $importance, '7' ); ?> value="7">Handcuffed Briefcase</option>
+						<option <?php selected( $importance, '6' ); ?> value="6">FedEx</option>
+						<option <?php selected( $importance, '5' ); ?> value="5">UPS</option>
+						<option <?php selected( $importance, '4' ); ?> value="4">Snail Mail</option>
+						<option <?php selected( $importance, '3' ); ?> value="3">Post-it</option>
+						<option <?php selected( $importance, '2' ); ?> value="2">Windshield Flyer</option>
+						<option <?php selected( $importance, '1' ); ?> value="1">Copyright Notice</option>
+					</select>
+				</fieldset>
+			</td>
+		</tr>
 		<tr>
 			<td valign="top">Display Size</td>
 			<td valign="top">
@@ -268,7 +289,6 @@ function arke_presentation_meta_box_display( $post )
 add_action( 'save_post', 'arke_presentation_save' );
 function arke_presentation_save( $post_id )
 {
-
 	// verify if this is an auto save routine. 
 	// If it is our form has not been submitted, so we dont want to do anything
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) 
@@ -284,17 +304,20 @@ function arke_presentation_save( $post_id )
 		return;
 
 	// OK, we're authenticated: we need to find and save the data
+	$importance = '';
 	$presentation = array(
 		'size' => '',
 		'thumbnail' => '',
 		'excerpt' => ''
 	);
-		
+
 	//sanitize user input
+	$importance = sanitize_text_field( $_POST['arke_importance'] );
 	$presentation['size'] = sanitize_text_field( $_POST['arke_size'] );
 	$presentation['thumbnail'] = sanitize_text_field( $_POST['arke_thumbnail'] );
 	$presentation['excerpt'] = sanitize_text_field( $_POST['arke_excerpt'] );
 
+	update_post_meta( $post_id, '_arke_importance', $importance );
 	update_post_meta( $post_id, '_arke_presentation', $presentation );
 }
 
@@ -334,6 +357,22 @@ function arke_get_presentation( $id = false )
 	}
 
 	return $presentation;
+}
+
+// Retrieve importance metadata
+function arke_get_importance( $id = false )
+{
+	// Must be used in the loop if no post id is passed
+	if( ! $id )
+		$id = get_the_ID();
+		
+	$importance = get_post_meta( $id, '_arke_importance', true );
+
+	// Default
+	if ( $importance === '' )
+		$importance = '5';
+
+	return $importance;
 }
 
 
