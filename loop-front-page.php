@@ -23,6 +23,11 @@ if ( have_posts() )
 
 	$posts_per_column = ceil( $post_count / $column_count );
 	$column_index = 0;
+
+	// Reorder the query
+	global $wp_query;
+	usort( $wp_query->posts, 'arke_query_sort_importance' );
+
 	
 	while ( have_posts() )
 	{
@@ -77,6 +82,11 @@ else
 }
 
 
+// Sort each column by date (not absolute time)
+foreach( $cols as &$col )
+	usort( $col, 'arke_column_sort_date' );
+
+
 
 
 ?>
@@ -96,7 +106,7 @@ Total Before Split: <?php echo $post_count; ?>
 Total After Split: <?php echo count($cols[0]) + count($cols[1]) + count($cols[2]); ?>
 
 Elements Recombined: <?php
-$agg = $cols[0] + $cols[1] + $cols[2];
+$agg = array_merge( $cols[0], $cols[1], $cols[2] );
 foreach( $agg as $k => $v )
 	echo $k . ' ' . $v['presentation']['thumbnail'] . ' ';
 ?>

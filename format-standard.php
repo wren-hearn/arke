@@ -2,10 +2,10 @@
 
 echo 'Importance: ';
 var_dump( $importance );
-echo '<br/>Presentation: ';
-var_dump( $presentation );
-echo '<br/>Colspan: ';
-var_dump( $colspan );
+//echo '<br/>Presentation: ';
+//var_dump( $presentation );
+//echo '<br/>Colspan: ';
+//var_dump( $colspan );
 echo '<br/>The date: ' . get_the_date( 'Y-m-d' );
 
 if ( has_post_thumbnail() && $presentation['thumbnail'] == 'yes' )

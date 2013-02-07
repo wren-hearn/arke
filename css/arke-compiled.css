@@ -4,8 +4,7 @@ pre p{margin-bottom:0;}
 .transparent-readable{background-color:rgba(255, 255, 255, 0.65);}
 .transparent-ultra-readable{background-color:rgba(255, 255, 255, 0.8);}
 .clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
-@media screen and (max-width:767px){body{padding-left:14px;padding-right:14px;}}.container{background-color:rgba(255, 255, 255, 0.4);padding:6px;}
-.grid-preview{background-color:rgba(0, 0, 0, 0.65);color:white;height:2em;margin-bottom:1em;margin-top:1em;text-align:center;line-height:2em;}
+@media screen and (max-width:767px){body{padding-left:14px;padding-right:14px;}}.grid-preview{background-color:rgba(0, 0, 0, 0.65);color:white;height:2em;margin-bottom:1em;margin-top:1em;text-align:center;line-height:2em;}
 .site-header{background-color:#63c5ed;overflow:hide;min-height:120px;}
 .site-header-title,.site-header-desc{display:block;float:left;clear:both;padding:0.25em 0.5em;background-color:rgba(255, 255, 255, 0.8);}
 .site-header-title{margin:0.5em 0 0 5%;}

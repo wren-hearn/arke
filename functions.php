@@ -237,16 +237,16 @@ function arke_presentation_meta_box_display( $post )
 			<td valign="top">
 				<fieldset>
 					<select name="arke_importance" id="arke_importance">
-						<option <?php selected( $importance, '10' ); ?> value="10">SETI</option>
-						<option <?php selected( $importance, '9' ); ?> value="9">Burning Bush</option>
-						<option <?php selected( $importance, '8' ); ?> value="8">Flare Gun</option>
-						<option <?php selected( $importance, '7' ); ?> value="7">Handcuffed Briefcase</option>
-						<option <?php selected( $importance, '6' ); ?> value="6">FedEx</option>
-						<option <?php selected( $importance, '5' ); ?> value="5">UPS</option>
-						<option <?php selected( $importance, '4' ); ?> value="4">Snail Mail</option>
-						<option <?php selected( $importance, '3' ); ?> value="3">Post-it</option>
-						<option <?php selected( $importance, '2' ); ?> value="2">Windshield Flyer</option>
-						<option <?php selected( $importance, '1' ); ?> value="1">Copyright Notice</option>
+						<option <?php selected( $importance, 10 ); ?> value="10">SETI</option>
+						<option <?php selected( $importance, 9 ); ?> value="9">Burning Bush</option>
+						<option <?php selected( $importance, 8 ); ?> value="8">Flare Gun</option>
+						<option <?php selected( $importance, 7 ); ?> value="7">Handcuffed Briefcase</option>
+						<option <?php selected( $importance, 6 ); ?> value="6">FedEx</option>
+						<option <?php selected( $importance, 5 ); ?> value="5">UPS</option>
+						<option <?php selected( $importance, 4 ); ?> value="4">Snail Mail</option>
+						<option <?php selected( $importance, 3 ); ?> value="3">Post-it</option>
+						<option <?php selected( $importance, 2 ); ?> value="2">Windshield Flyer</option>
+						<option <?php selected( $importance, 1 ); ?> value="1">Copyright Notice</option>
 					</select>
 				</fieldset>
 			</td>
@@ -312,7 +312,7 @@ function arke_presentation_save( $post_id )
 	);
 
 	//sanitize user input
-	$importance = sanitize_text_field( $_POST['arke_importance'] );
+	$importance = intval( sanitize_text_field( $_POST['arke_importance'] ) );
 	$presentation['size'] = sanitize_text_field( $_POST['arke_size'] );
 	$presentation['thumbnail'] = sanitize_text_field( $_POST['arke_thumbnail'] );
 	$presentation['excerpt'] = sanitize_text_field( $_POST['arke_excerpt'] );
@@ -325,6 +325,16 @@ function arke_presentation_save( $post_id )
 
 /* Post Presentation Helper Functions
 -------------------------------------------------- */
+
+function arke_column_sort_date( $a, $b )
+{
+    return strcmp( $b['date'], $a['date'] );
+}
+
+function arke_query_sort_importance( $a, $b )
+{
+    return arke_get_importance( $a->ID ) < arke_get_importance( $b->ID );
+}
 
 // Loop through a column
 function arke_output_column( $col )
@@ -370,7 +380,7 @@ function arke_get_importance( $id = false )
 
 	// Default
 	if ( $importance === '' )
-		$importance = '5';
+		$importance = 5;
 
 	return $importance;
 }
@@ -378,19 +388,28 @@ function arke_get_importance( $id = false )
 
 /* Global query modifications to order by importance
 -------------------------------------------------- */
-/*
+
 // Modify default query on homepage
 add_action( 'pre_get_posts', 'arke_sort_query_by_importance' );
 function arke_sort_query_by_importance( $query )
 {
 	if ( $query->is_home() )
 	{
-		$query->query_vars['no_found_rows'] = true;
-		$query->query_vars['update_post_meta_cache'] = false;
-		$query->query_vars['update_post_term_cache'] = false;
+		//$query->query_vars['orderby'] = 'meta_value_num';
+		//$query->query_vars['meta_key'] = '_arke_importance';
+		/*
+		$query->query_vars['meta_query'] = array(
+
+			array(
+				'key'     => '_arke_importance',
+				'compare' => 'EXISTS',
+				'type'    => 'NUMERIC'
+			),
+			
+        );
+        */
 	}
 }
-*/
 
 
 
