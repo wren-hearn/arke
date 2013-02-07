@@ -8,6 +8,8 @@ page templates
 
 sticky post support
 
+add == conditional for first query sort so that date is used in the event of matching importances
+
 alternate compact templates for post formats
 
 catfish custom post type (use meerkat for animation?)
