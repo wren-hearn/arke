@@ -1,6 +1,4 @@
 
-learn how to compile LESS with node.js automatically as part of commits
-
 default sidebar content
 	login/forgot password/register
 
@@ -12,7 +10,10 @@ add == conditional for first query sort so that date is used in the event of mat
 
 alternate compact templates for post formats
 
-catfish custom post type (use meerkat for animation?)
+no-js share buttons
+	https://github.com/tosbourn/nojs-socialshare
+
+catfish custom post type
 
 pagespeed optimizations
 
@@ -27,14 +28,6 @@ lazy load images below the fold or expensive and less-important
 For small columns, reload images to fill space in mobile layout? Lazy load all post thumbnails and let javascript figure out which to load?
 
 Use thumbnail height based on column placement, not fixed
-
-Use array_chunk to split post array between columns
-
-Put latest twitter post(s?) on homepage with pic of author like BBC world news
-
-Replace Jetpack
-	Use post importance to populate "most popular posts" module
-	Find super lightweight way to do the same video/audio embed
 
 framework for prefetch and ad serving that supports multiple profiles to load based on screen size (preferably javascript)
 	http://www.quirksmode.org/blog/archives/2010/08/combining_media.html
@@ -70,3 +63,33 @@ re-do form validation using Parsley and Garlic
 
 tour
 	http://sorich87.github.com/bootstrap-tour/index.html
+
+Put latest twitter post(s?) on homepage with pic of author like BBC world news
+
+Replace Jetpack
+	Use post importance to populate "most popular posts" module
+	Find super lightweight way to do the same video/audio embed
+
+// Remove unneeded widgets that have undesirable query overhead
+//add_action( 'widgets_init', 'remove_unneeded_widgets' );
+function remove_unneeded_widgets() {
+	unregister_widget('WP_Widget_Pages');
+	unregister_widget('WP_Widget_Calendar');
+	unregister_widget('WP_Widget_Tag_Cloud');
+	unregister_widget('WP_Nav_Menu_Widget');
+	/*
+		WP_Widget_Pages                   = Pages Widget
+		WP_Widget_Calendar                = Calendar Widget
+		WP_Widget_Archives                = Archives Widget
+		WP_Widget_Links                   = Links Widget
+		WP_Widget_Meta                    = Meta Widget
+		WP_Widget_Search                  = Search Widget
+		WP_Widget_Text                    = Text Widget
+		WP_Widget_Categories              = Categories Widget
+		WP_Widget_Recent_Posts            = Recent Posts Widget
+		WP_Widget_Recent_Comments         = Recent Comments Widget
+		WP_Widget_RSS                     = RSS Widget
+		WP_Widget_Tag_Cloud               = Tag Cloud Widget
+		WP_Nav_Menu_Widget                = Menus Widget
+	*/
+}

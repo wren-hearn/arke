@@ -11,30 +11,6 @@ if( !is_admin() )
 	add_filter('show_admin_bar', '__return_false');
 }
 
-// Remove unneeded widgets that have undesirable query overhead
-add_action( 'widgets_init', 'remove_unneeded_widgets' );
-function remove_unneeded_widgets() {
-	unregister_widget('WP_Widget_Pages');
-	unregister_widget('WP_Widget_Calendar');
-	unregister_widget('WP_Widget_Tag_Cloud');
-	unregister_widget('WP_Nav_Menu_Widget');
-	/*
-		WP_Widget_Pages                   = Pages Widget
-		WP_Widget_Calendar                = Calendar Widget
-		WP_Widget_Archives                = Archives Widget
-		WP_Widget_Links                   = Links Widget
-		WP_Widget_Meta                    = Meta Widget
-		WP_Widget_Search                  = Search Widget
-		WP_Widget_Text                    = Text Widget
-		WP_Widget_Categories              = Categories Widget
-		WP_Widget_Recent_Posts            = Recent Posts Widget
-		WP_Widget_Recent_Comments         = Recent Comments Widget
-		WP_Widget_RSS                     = RSS Widget
-		WP_Widget_Tag_Cloud               = Tag Cloud Widget
-		WP_Nav_Menu_Widget                = Menus Widget
-	*/
-}
-
 
 
 /* Theme Globals
@@ -473,6 +449,17 @@ add_action( 'the_post', 'set_checkpoint_the_post' );
 function set_checkpoint_the_post( $post )
 {
 	apply_filters("debug", "Post: " . $post->post_title);
+}
+
+// Clean up widget settings that weren't set at installation
+// If never used in a sidebar, their lack of default options will
+// trigger queries every page load
+add_action( 'after_switch_theme', 'arke_set_missing_widget_options' );
+function arke_set_missing_widget_options( ){
+	add_option( 'widget_pages', array ( '_multiwidget' => 1 ) );
+	add_option( 'widget_calendar', array ( '_multiwidget' => 1 ) );
+	add_option( 'widget_tag_cloud', array ( '_multiwidget' => 1 ) );
+	add_option( 'widget_nav_menu', array ( '_multiwidget' => 1 ) );
 }
 
 
