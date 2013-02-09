@@ -1,18 +1,41 @@
+/*
+Theme Name: Arke
+Theme URI: https://github.com/jeffrey-hearn/arke
+Description: A responsive theme the newest WordPress features, built with Bootstrap and LESS.
+Author: Jeffrey Hearn
+Author URI: http://www.fondpageant.com
+Version: .1
+Version: 1.0
+Tags: responsive, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, bootstrap, less
 
-/* Layout Dimensions
---------------------------------------------------
+License: GNU Public License v3
+License URI: http://www.gnu.org/licenses/gpl.html
 
-|------------------------------1170px---------------------------------|
-Two-column full-width viewport diagram
-|-----------------770px-----------------||-30px-||-------370px--------|
-Two-column content inside 14px padding
-  |---------------742px---------------|            |-----342px------|
+	This theme is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This theme is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+For Aaron.
+
+
 
 */
 
 
-/* Variables
--------------------------------------------------- */
+
+// Variables
+//------------------------------------------------ */
 
 @header-color: #63c5ed;
 
@@ -26,6 +49,10 @@ Two-column content inside 14px padding
 
 @primary-text: #000000;
 @secondary-text: #ffffff;
+
+@primary-column: #57D8F1;
+@secondary-column: #267A8A;
+@darken-column: 50%;
 
 @link: #08C;
 @link-hover: #005580;
@@ -44,6 +71,7 @@ Two-column content inside 14px padding
 
 blockquote p + p { margin-top: @paragraph-gap; }
 pre p { margin-bottom: 0; }
+h3 { line-height: 30px; }
 
 
 
@@ -100,7 +128,47 @@ pre p { margin-bottom: 0; }
 }
 */
 
-.grid-preview { background-color: fadeout( black, 35% ); color: white; height: 2em; margin-bottom: 1em; margin-top: 1em; text-align: center; line-height: 2em; }
+.grid-preview { background-color: fadeout( black, 35% ); color: white; height: 2em; margin-bottom: 0.25em; margin-top: 0.25em; text-align: center; line-height: 2em; }
+
+
+
+/* WordPress Generated Styles
+-------------------------------------------------- */
+
+.wp-caption,
+.gallery-caption { margin-top: (@paragraph-gap * 4); clear: both; }
+	.wp-caption-text { margin: (@paragraph-gap) 0 (@paragraph-gap * 4) 0; }
+	.wp-caption img { margin: 0; }
+
+.aligncenter,
+a img.aligncenter {
+    display: block;
+    margin: auto;
+	clear: both;
+}
+
+.alignright,
+a img.alignright { float:right; margin-left: (@paragraph-gap * 4); clear: both; }
+
+.alignleft,
+a img.alignleft { float: left; margin-right: (@paragraph-gap * 4); clear: both; }
+
+
+
+
+
+/* Content Styles based on WP hooks
+-------------------------------------------------- */
+
+img.alignright,
+img.alignleft,
+img.aligncenter,
+img.alignnone {
+	margin-top: (@paragraph-gap * 3);
+	margin-bottom: (@paragraph-gap * 3);
+}
+
+
 
 
 
@@ -220,6 +288,45 @@ pre p { margin-bottom: 0; }
 
 
 
+/* Column Heading Module (Affixed with Bootstrap)
+-------------------------------------------------- */
+
+
+
+.colhead-head {
+	box-sizing: border-box;
+	padding: 0 @text-padding;
+	.colhead-transitions( 0.5s );
+	background-color: @primary-column;
+	color: @secondary-text;
+}
+
+.colhead-transitions (@duration) {
+	-moz-transition-property: background-color, color;
+	-moz-transition-duration: @duration;
+	-moz-transition-timing-function: ease-out;
+	-webkit-transition-property: background-color, color;
+	-webkit-transition-duration: @duration;
+	-o-transition-property: background-color, color;
+	-o-transition-duration: @duration;
+}
+
+/* State */
+#colhead.affix { top: 0; z-index: 1000; }
+
+.affix .colhead-head {
+	.colhead-transitions( 0.5s );
+	background-color: darken( @primary-column, @darken-column );
+	color: darken( @secondary-text, @darken-column );
+}
+
+/* Subclasses */
+
+	.colhead-other-stories { background-color: @secondary-column; }
+		/* State */
+		.affix .colhead-other-stories { background-color: darken( @secondary-column, @darken-column ); }
+
+
 
 
 /* Big Post Excerpt Module
@@ -227,7 +334,7 @@ pre p { margin-bottom: 0; }
 
 .full-excerpt { }
 	.full-excerpt + .full-excerpt {
-		margin-top: (@outer-padding * 3);
+		margin-top: (@outer-padding * 0.5);
 	}
 	.full-excerpt-inset {
 		.box-sizing( border-box );
@@ -255,7 +362,7 @@ pre p { margin-bottom: 0; }
 				display: inline;
 				margin: 0;
 				position: absolute;
-				bottom: (@text-padding / 4);
+				bottom: (@text-padding / 2);
 				left: 0;
 				padding: (@text-padding / 4);
 				.transparent-readable;

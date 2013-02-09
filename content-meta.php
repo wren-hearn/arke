@@ -17,6 +17,6 @@
 			}
 			?>
 		</small>
-		<?php edit_post_link('Edit', '<small class="muted">|</small> <small>', '</small>'); ?>
+		<?php edit_post_link('Edit', '<small class="muted">|</small> <small>Importance: ' . arke_get_importance() . '</small> <small class="muted">|</small> <small>', '</small>'); ?>
 	</p>
 </div>

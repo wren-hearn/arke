@@ -1,6 +1,4 @@
 /**
- * navigation.js
- *
  * Handles toggling the navigation menu for small screens.
  */
 ( function() {
@@ -33,4 +31,22 @@
 		}
 	};
 } )();
+
+
+
+jQuery(document).ready(function($) {
+
+	$('#colhead-wrapper').height($("#colhead").height());
+	$('#colhead').affix({
+		offset: $('#colhead').position()
+	});
+
+
+
+
+
+
+});
+
+
 

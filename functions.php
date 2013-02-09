@@ -36,7 +36,7 @@ add_theme_support( 'automatic-feed-links' );
 // Default background
 add_theme_support( 'custom-background',
 	array(
-	'default-image' => get_template_directory_uri() . '/img/orange-rings-bg.jpg'
+	'default-image' => get_template_directory_uri() . '/img/gplaypattern-inverted.png'
 	)
 );
 
@@ -412,6 +412,8 @@ function wpfme_feed_post_thumbnail( $content )
 	}
 	return $content;
 }
+
+
 
 // Custom walker to get flat lists of catagory and post_tag terms
 // to feed into Bootstrap's typeahead attribute for the search box

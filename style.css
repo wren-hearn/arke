@@ -1,14 +1,12 @@
 /*
 Theme Name: Arke
-Theme URI: http://www.fondpageant.com
+Theme URI: https://github.com/jeffrey-hearn/arke
 Description: A responsive theme the newest WordPress features, built with Bootstrap and LESS.
 Author: Jeffrey Hearn
 Author URI: http://www.fondpageant.com
 Version: .1
 Version: 1.0
-Tags: responsive, two-columns, fixed-width, custom-header, custom-background,
-threaded-comments, sticky-post, translation-ready, microformats,
-rtl-language-support, bootstrap, less
+Tags: responsive, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, bootstrap, less
 
 License: GNU Public License v3
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -33,13 +31,313 @@ For Aaron.
 
 
 */
-
-
-
-
-
-
-
-
-
-
+/* Fixes (Bootstrap is Whitespacey)
+-------------------------------------------------- */
+blockquote p + p {
+  margin-top: 0.5em;
+}
+pre p {
+  margin-bottom: 0;
+}
+h3 {
+  line-height: 30px;
+}
+/* Mixins
+-------------------------------------------------- */
+.transparent-container {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.transparent-readable {
+  background-color: rgba(255, 255, 255, 0.65);
+}
+.transparent-ultra-readable {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.clearfix:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+/* Layout
+-------------------------------------------------- */
+@media screen and (max-width: 767px) {
+  body {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+/*
+.container {
+	.transparent-container;
+	padding: @outer-padding;
+}
+*/
+.grid-preview {
+  background-color: rgba(0, 0, 0, 0.65);
+  color: white;
+  height: 2em;
+  margin-bottom: 0.25em;
+  margin-top: 0.25em;
+  text-align: center;
+  line-height: 2em;
+}
+/* WordPress Generated Styles
+-------------------------------------------------- */
+.wp-caption,
+.gallery-caption {
+  margin-top: 2em;
+  clear: both;
+}
+.wp-caption-text {
+  margin: 0.5em 0 2em 0;
+}
+.wp-caption img {
+  margin: 0;
+}
+.aligncenter,
+a img.aligncenter {
+  display: block;
+  margin: auto;
+  clear: both;
+}
+.alignright,
+a img.alignright {
+  float: right;
+  margin-left: 2em;
+  clear: both;
+}
+.alignleft,
+a img.alignleft {
+  float: left;
+  margin-right: 2em;
+  clear: both;
+}
+/* Content Styles based on WP hooks
+-------------------------------------------------- */
+img.alignright,
+img.alignleft,
+img.aligncenter,
+img.alignnone {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+/* Site Header Module
+-------------------------------------------------- */
+.site-header {
+  background-color: #63c5ed;
+  overflow: hide;
+  min-height: 120px;
+}
+.site-header-title,
+.site-header-desc {
+  display: block;
+  float: left;
+  clear: both;
+  padding: 0.25em 0.5em;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.site-header-title {
+  margin: 0.5em 0 0 5%;
+}
+.site-header-desc {
+  margin: 0.5em 0 0 10%;
+}
+/* Search Module
+-------------------------------------------------- */
+.search,
+.search-container {
+  margin: 0;
+}
+/* Navigation Module
+-------------------------------------------------- */
+.main-navigation {
+  text-align: left;
+}
+.main-navigation li {
+  margin-top: 24px;
+  margin-top: 1.714285714rem;
+  font-size: 12px;
+  font-size: 0.857142857rem;
+  line-height: 1.42857143;
+}
+@media screen and (max-width: 599px) {
+  .main-navigation > div > ul {
+    margin: 0;
+    background-color: rgba(191, 191, 191, 0.9);
+  }
+  .main-navigation li {
+    list-style-type: none;
+    margin: 0;
+  }
+  .main-navigation li a {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 0.75em;
+    border-bottom: 1px solid #ccc;
+    text-transform: uppercase;
+  }
+  .main-navigation li li a {
+    background-color: rgba(242, 242, 242, 0.9);
+  }
+  .main-navigation .menu-toggle {
+    margin: 0;
+  }
+}
+@media screen and (min-width: 600px) {
+  .main-navigation > div > ul {
+    display: inline-block !important;
+    text-align: left;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.85);
+  }
+  .main-navigation ul {
+    margin: 0;
+    text-indent: 0;
+    padding-left: 1em;
+    box-sizing: border-box;
+  }
+  .main-navigation li a,
+  .main-navigation li {
+    display: inline-block;
+  }
+  .main-navigation li a {
+    border-bottom: 0;
+    color: #0088cc;
+    line-height: 3.692307692;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .main-navigation li {
+    margin: 0 20px 0 0;
+    margin: 0 2rem 0 0;
+    position: relative;
+  }
+  .main-navigation li ul {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 100%;
+    z-index: 1;
+  }
+  .main-navigation li ul ul {
+    top: 0;
+    left: 100%;
+  }
+  .main-navigation li ul li a {
+    color: #0088cc;
+    background-color: rgba(242, 242, 242, 0.9);
+    display: block;
+    font-size: 11px;
+    font-size: 0.785714286rem;
+    line-height: 2.181818182;
+    padding: 8px 10px;
+    padding: 0.571428571rem 0.714285714rem;
+    width: 180px;
+    width: 12.85714286rem;
+    white-space: normal;
+  }
+  .main-navigation li ul li a:hover {
+    color: #0088cc;
+    background-color: rgba(255, 255, 255, 0.95);
+  }
+}
+/* State */
+.main-navigation > div > ul {
+  display: none;
+}
+.main-navigation .toggled-on {
+  display: block;
+}
+@media screen and (min-width: 600px) {
+  .main-navigation li ul {
+    display: none;
+  }
+  .main-navigation ul li:hover > ul {
+    display: block;
+  }
+  .main-navigation .menu-toggle {
+    display: none;
+  }
+}
+/* Column Heading Module (Affixed with Bootstrap)
+-------------------------------------------------- */
+.colhead-head {
+  box-sizing: border-box;
+  padding: 0 1em;
+  -moz-transition-property: background-color, color;
+  -moz-transition-duration: 0.5s;
+  -moz-transition-timing-function: ease-out;
+  -webkit-transition-property: background-color, color;
+  -webkit-transition-duration: 0.5s;
+  -o-transition-property: background-color, color;
+  -o-transition-duration: 0.5s;
+  background-color: #57d8f1;
+  color: #ffffff;
+}
+/* State */
+#colhead.affix {
+  top: 0;
+  z-index: 1000;
+}
+.affix .colhead-head {
+  -moz-transition-property: background-color, color;
+  -moz-transition-duration: 0.5s;
+  -moz-transition-timing-function: ease-out;
+  -webkit-transition-property: background-color, color;
+  -webkit-transition-duration: 0.5s;
+  -o-transition-property: background-color, color;
+  -o-transition-duration: 0.5s;
+  background-color: #063943;
+  color: #808080;
+}
+/* Subclasses */
+.colhead-other-stories {
+  background-color: #267a8a;
+}
+/* State */
+.affix .colhead-other-stories {
+  background-color: #000000;
+}
+/* Big Post Excerpt Module
+-------------------------------------------------- */
+.full-excerpt + .full-excerpt {
+  margin-top: 3px;
+}
+.full-excerpt-inset {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  overflow: auto;
+  background-color: #ffffff;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: 1em;
+}
+.full-excerpt-inset > .post-icon {
+  float: left;
+  margin-right: 0.5em;
+  background-color: #ffffff;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  font-size: 2em;
+}
+.full-excerpt-thumbnail-link {
+  color: #000000;
+}
+.full-excerpt-post-thumbnail {
+  position: relative;
+  display: block;
+  height: 200px;
+}
+.full-excerpt-post-thumbnail-headline {
+  display: inline;
+  margin: 0;
+  position: absolute;
+  bottom: 0.5em;
+  left: 0;
+  padding: 0.25em;
+  background-color: rgba(255, 255, 255, 0.65);
+}

@@ -4,6 +4,8 @@ default sidebar content
 
 page templates
 
+make bootstrap a git submodule
+
 sticky post support
 
 add == conditional for first query sort so that date is used in the event of matching importances

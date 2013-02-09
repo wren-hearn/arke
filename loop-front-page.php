@@ -76,7 +76,7 @@ else
 			</div>
 		</div>
 	</div>
-	<?
+	<?php
 	// Stop executing this template file, but continue outside this file's scope
 	return;
 }
@@ -95,9 +95,7 @@ foreach( $cols as &$col )
 
 
 <div class="row">
-
 	<div class="span12">
-
 		<pre>
 Posts Per Column: <?php echo $posts_per_column; ?>
 			
@@ -111,8 +109,17 @@ foreach( $agg as $k => $v )
 	echo $k . ' ' . $v['presentation']['thumbnail'] . ' ';
 ?>
 		</pre>
-
 	</div>
+</div>
+
+<div id="colhead-wrapper">
+	<div id="colhead" class="row">
+		<div class="span5 colhead-head colhead-top-story"><h4>Top Stories</h4></div>
+		<div class="span7 colhead-head colhead-other-stories"><h4>Everything Else</h4></div>
+	</div>
+</div>
+
+<div class="row">
 
 	<div class="span5">
 		<?php arke_output_column( $cols[0] ); ?>
