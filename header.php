@@ -85,42 +85,6 @@
 
 			</header>
 
-			<div class="row">
-				<div class="span1 grid-preview">1</div>
-				<div class="span1 grid-preview">2</div>
-				<div class="span1 grid-preview">3</div>
-				<div class="span1 grid-preview">4</div>
-				<div class="span1 grid-preview">5</div>
-				<div class="span1 grid-preview">6</div>
-				<div class="span1 grid-preview">7</div>
-				<div class="span1 grid-preview">8</div>
-				<div class="span1 grid-preview">9</div>
-				<div class="span1 grid-preview">10</div>
-				<div class="span1 grid-preview">11</div>
-				<div class="span1 grid-preview">12</div>
-			</div>
-
-			<div class="row">
-				<div class="span2 grid-preview">2</div>
-				<div class="span3 grid-preview">3</div>
-				<div class="span4 grid-preview">4</div>
-				<div class="span3 grid-preview">3</div>
-			</div>
-
-			<div class="row">
-				<div class="span5 grid-preview">5</div>
-				<div class="span6 grid-preview">6</div>
-				<div class="span1 grid-preview">1</div>
-			</div>
-
-			<div class="row">
-				<div class="span7 grid-preview">7</div>
-				<div class="span5 grid-preview">5</div>
-			</div>
-
-			<div class="row">
-				<div class="span8 grid-preview">8</div>
-				<div class="span4 grid-preview">4</div>
-			</div>
+			<?php global $theme_helpers; if ( $theme_helpers ) arke_show_grid_reference(); ?>
 
 			<?php apply_filters("debug", "Header end"); ?>

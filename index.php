@@ -4,7 +4,7 @@
 <div class="row">
 
 	<div class="span8">
-		<?php get_template_part( 'loop' ); ?>
+		<?php get_template_part( 'loops/loop' ); ?>
 	</div>
 
 	<div class="sidebar span4">

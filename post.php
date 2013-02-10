@@ -7,7 +7,7 @@
 		$post_format = 'standard';
 
 	// Load specialized post format
-	include(locate_template('format-' . $post_format . '.php'));
+	include(locate_template('post-formats/format-' . $post_format . '.php'));
 	?>
 
 </div>

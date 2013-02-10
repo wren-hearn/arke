@@ -28,7 +28,7 @@ else
 }
 ?>
 
-	<?php get_template_part( 'content-meta' ); ?>
+	<?php get_template_part( 'partials/content-meta' ); ?>
 
 	<?php
 	if( is_single() )
@@ -37,16 +37,20 @@ else
 		?>
 
 		<div class="content-footer">
-			<p>
-				<small>
-					Posted in: <?php the_category(' | '); ?>
-				</small>
-			</p>
-			<p>
-				<small>
-					Tagged as: <?php the_tags(' | '); ?>
-				</small>
-			</p>
+			<?php if ( has_category() ): ?>
+				<p>
+					<small>
+						Posted in: <?php the_category(' | '); ?>
+					</small>
+				</p>
+			<?php endif; ?>
+			<?php if ( has_tag() ): ?>
+				<p>
+					<small>
+						Tagged as: <?php the_tags(' | '); ?>
+					</small>
+				</p>
+			<?php endif; ?>
 		</div>
 
 		<?php

@@ -22,9 +22,15 @@ $theme_namespace = 'arke';
 global $use_compiled_css;
 $use_compiled_css = true;
 
+// Enable theme design helpers like grid reference, banner placeholders, etc.
+$theme_helpers = false;
+
 // Set a maximum width for Oembedded objects
 if ( ! isset( $content_width ) )
 $content_width = 742;
+
+// Define the default colspan for content displayed in the grid
+$default_colspan = 8;
 
 
 
@@ -361,6 +367,14 @@ function arke_get_importance( $id = false )
 	return $importance;
 }
 
+// Specify the column-span of the main content area for single-item view
+function arke_get_default_colspan()
+{
+	global $default_colspan;
+	return $default_colspan;
+}
+
+
 
 /* Global query modifications to order by importance
 -------------------------------------------------- */
@@ -478,6 +492,61 @@ function arke_bust_menu_cache()
 
 //delete_transient( $theme_namespace . '_top_menu' );
 //delete_transient( $theme_namespace . '_search_terms' );
+
+
+
+
+
+/* Theme Design Helpers
+-------------------------------------------------- */
+
+// Display a reference for the Bootstrap grid
+function arke_show_grid_reference()
+{
+	?>
+	<div class="row">
+		<div class="span1 grid-preview">1</div>
+		<div class="span1 grid-preview">2</div>
+		<div class="span1 grid-preview">3</div>
+		<div class="span1 grid-preview">4</div>
+		<div class="span1 grid-preview">5</div>
+		<div class="span1 grid-preview">6</div>
+		<div class="span1 grid-preview">7</div>
+		<div class="span1 grid-preview">8</div>
+		<div class="span1 grid-preview">9</div>
+		<div class="span1 grid-preview">10</div>
+		<div class="span1 grid-preview">11</div>
+		<div class="span1 grid-preview">12</div>
+	</div>
+
+	<div class="row">
+		<div class="span2 grid-preview">2</div>
+		<div class="span3 grid-preview">3</div>
+		<div class="span4 grid-preview">4</div>
+		<div class="span3 grid-preview">3</div>
+	</div>
+
+	<div class="row">
+		<div class="span5 grid-preview">5</div>
+		<div class="span6 grid-preview">6</div>
+		<div class="span1 grid-preview">1</div>
+	</div>
+
+	<div class="row">
+		<div class="span7 grid-preview">7</div>
+		<div class="span5 grid-preview">5</div>
+	</div>
+
+	<div class="row">
+		<div class="span8 grid-preview">8</div>
+		<div class="span4 grid-preview">4</div>
+	</div>
+	<?php
+}
+
+
+
+
 
 
 // Profiler tag

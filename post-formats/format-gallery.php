@@ -9,6 +9,6 @@
 
 	<p><?php the_title(); ?></p>
 
-	<?php get_template_part( 'content-meta' ); ?>
+	<?php get_template_part( 'partials/content-meta' ); ?>
 
 </div>  <!-- ./full-excerpt-inset -->
