@@ -1,10 +1,20 @@
 
 default sidebar content
-	login/forgot password/register
+	login/forgot password/register accordion
+
+get super-comfortable with xdebug and webgrind
+
+add state fixes to affix styles/JS so they don't show in mobile layout
+
+figure out the right hooks with which to bust the top menu cache
 
 page templates
 
 make bootstrap a git submodule
+
+Add failsafe cache buster to theme options page
+
+theme options page
 
 sticky post support
 

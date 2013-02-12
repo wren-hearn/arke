@@ -67,8 +67,8 @@
 					<?php
 					/* Main menu, cached with transient
 					-------------------------------------------------- */
-					global $theme_namespace;
-					if ( false === ( $menu = get_transient( $theme_namespace . '_top_menu' ) ) )
+					global $theme_namespace, $use_theme_transients;
+					if ( ! $use_theme_transients || false === ( $menu = get_transient( $theme_namespace . '_top_menu' ) ) )
 					{
 						$args = array(
 							'theme_location' => 'top-menu',
@@ -77,7 +77,8 @@
 							'echo' => 0
 						);
 						$menu = wp_nav_menu($args);
-						set_transient( $theme_namespace . '_top_menu', $menu, MINUTE_IN_SECONDS );
+						if ( $use_theme_transients )
+							set_transient( $theme_namespace . '_top_menu', $menu, MINUTE_IN_SECONDS );
 					}
 					echo $menu;
 					?>

@@ -1,8 +1,8 @@
 <?php
 /* Typeahead search terms bank, cached with transient
 -------------------------------------------------- */
-global $theme_namespace;
-if ( false === ( $typeahead = get_transient( $theme_namespace . '_search_terms' ) ) )
+global $theme_namespace, $use_theme_transients;
+if ( ! $use_theme_transients || false === ( $typeahead = get_transient( $theme_namespace . '_search_terms' ) ) )
 {
 	$plaintext_cat_walker = new Plaintext_Cat_Walker;
 	$args = array(
@@ -25,7 +25,9 @@ if ( false === ( $typeahead = get_transient( $theme_namespace . '_search_terms' 
 	$tags = rtrim( $tags, ', ' );
 
 	$typeahead = '[' . $cats . ', ' . $tags . ']';
-	set_transient( $theme_namespace . '_search_terms', $typeahead, MINUTE_IN_SECONDS );
+
+	if ( $use_theme_transients )
+		set_transient( $theme_namespace . '_search_terms', $typeahead, MINUTE_IN_SECONDS );
 }
 ?>
 

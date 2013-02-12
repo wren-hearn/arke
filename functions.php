@@ -18,6 +18,9 @@ if( !is_admin() )
 global $theme_namespace;
 $theme_namespace = 'arke';
 
+global $use_theme_transients;
+$use_theme_transients = true;
+
 // Use client-side LESS sheets or use compiled CSS
 global $use_compiled_css;
 $use_compiled_css = true;
@@ -376,34 +379,6 @@ function arke_get_default_colspan()
 
 
 
-/* Global query modifications to order by importance
--------------------------------------------------- */
-
-// Modify default query on homepage
-add_action( 'pre_get_posts', 'arke_sort_query_by_importance' );
-function arke_sort_query_by_importance( $query )
-{
-	if ( $query->is_home() )
-	{
-		//$query->query_vars['orderby'] = 'meta_value_num';
-		//$query->query_vars['meta_key'] = '_arke_importance';
-		/*
-		$query->query_vars['meta_query'] = array(
-
-			array(
-				'key'     => '_arke_importance',
-				'compare' => 'EXISTS',
-				'type'    => 'NUMERIC'
-			),
-			
-        );
-        */
-	}
-}
-
-
-
-
 /* Miscellaneous Tweaks
 -------------------------------------------------- */
 
@@ -483,6 +458,7 @@ function arke_set_missing_widget_options( ){
 /* Transient Cache Busts
 -------------------------------------------------- */
 
+// Main menu
 add_action( 'wp_update_nav_menu', 'arke_bust_menu_cache' );
 function arke_bust_menu_cache()
 {
@@ -490,10 +466,35 @@ function arke_bust_menu_cache()
     delete_transient( $theme_namespace . '_top_menu' );
 }
 
-//delete_transient( $theme_namespace . '_top_menu' );
-//delete_transient( $theme_namespace . '_search_terms' );
+// Tag and cat list for typeahead search
+add_action( 'save_post', 'arke_bust_search_terms_cache' );
+add_action( 'delete_post', 'arke_bust_search_terms_cache' );
+add_action( 'create_category', 'arke_bust_search_terms_cache' );
+add_action( 'edit_category', 'arke_bust_search_terms_cache' );
+add_action( 'delete_category', 'arke_bust_search_terms_cache' );
+function arke_bust_search_terms_cache()
+{
+	global $theme_namespace;
+	delete_transient( $theme_namespace . '_search_terms' );
+}
 
+// Homepage Loop
+add_action( 'save_post', 'arke_bust_search_terms_cache' );
+add_action( 'delete_post', 'arke_bust_search_terms_cache' );
+function arke_bust_cache_homepage_loop()
+{
+	global $theme_namespace;
+	delete_transient( $theme_namespace . '_homepage_loop' );
+}
 
+// Failsafe cache buster
+function arke_bust_all_caches()
+{
+	global $theme_namespace;
+	delete_transient( $theme_namespace . '_top_menu' );
+	delete_transient( $theme_namespace . '_search_terms' );
+	delete_transient( $theme_namespace . '_homepage_loop' );
+}
 
 
 
