@@ -1,4 +1,6 @@
 
+http://codex.wordpress.org/Nginx
+
 default sidebar content
 	login/forgot password/register accordion
 
@@ -9,6 +11,8 @@ add state fixes to affix styles/JS so they don't show in mobile layout
 figure out the right hooks with which to bust the top menu cache
 
 page templates
+
+use the object cache for getting post metadata
 
 make bootstrap a git submodule
 

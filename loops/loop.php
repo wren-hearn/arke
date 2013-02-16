@@ -6,8 +6,8 @@ if ( have_posts() )
 	{
 		the_post();
 		
-		$importance = arke_get_importance();
-		$presentation = arke_get_presentation();
+		$importance = arke_get_post_meta( 'importance' );
+		$presentation = arke_get_post_meta( 'presentation' );
 		$colspan = arke_get_default_colspan();
 
 		include(locate_template('post.php'));

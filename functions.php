@@ -21,6 +21,9 @@ $theme_namespace = 'arke';
 global $use_theme_transients;
 $use_theme_transients = true;
 
+global $use_theme_object_cache;
+$use_theme_object_cache = false;
+
 // Use client-side LESS sheets or use compiled CSS
 global $use_compiled_css;
 $use_compiled_css = true;
@@ -212,8 +215,8 @@ function arke_presentation_meta_box_display( $post )
 	// Use nonce for verification
 	wp_nonce_field( 'arke_presentation_meta_box_action', 'arke_presentation_meta_box_nonce' );
 
-	$presentation = arke_get_presentation( $post->ID );
-	$importance = arke_get_importance( $post->ID );
+	$presentation = arke_get_post_meta( 'presentataion', $post->ID );
+	$importance = arke_get_post_meta( 'importance', $post->ID );
 
 	?>
 	<table class="form-table">
@@ -318,7 +321,8 @@ function arke_column_sort_date( $a, $b )
 
 function arke_query_sort_importance( $a, $b )
 {
-    return arke_get_importance( $a->ID ) < arke_get_importance( $b->ID );
+    return arke_get_post_meta( 'importance', $a->ID ) < arke_get_post_meta( 'importance', $b->ID );
+    
 }
 
 // Loop through a column
@@ -332,42 +336,51 @@ function arke_output_column( $col )
 		echo $buffered_post['html'];
 }
 
-// Retrieve presentation information or return defaults
-function arke_get_presentation( $id = false )
+// Retrieve theme-specific metadata, utilizing the object cache to
+// minimize lookups to the database
+function arke_get_post_meta( $key, $id = false )
 {
-	// Must be used in the loop if no post id is passed
-	if( ! $id )
-		$id = get_the_ID();
-		
-	$presentation = get_post_meta( $id, '_arke_presentation', true );
-
-	if ( $presentation === '' )
-	{
-		// Defaults
-		$presentation = array(
+	// Metadata keys and defaults
+	$defaults = array(
+		'importance' => 5,
+		'presentation' => array(
 			'size' => 'normal',
 			'thumbnail' => 'yes',
 			'excerpt' => 'yes'
-		);
+		)
+	);
+
+	// Check key against whitelist
+	if ( ! in_array( $key, array_keys( $defaults ) ) )
+		wp_die( 'arke_get_post_meta() requires a valid metadata key. Options are: ' . implode( ', ', array_keys( $defaults ) ) );
+	
+	// Must be used in the loop if no post id is passed
+	if( in_the_loop() )
+	{
+		$id = get_the_ID();
+	}
+	else if ( ! $id )
+	{
+		// This function has been used incorrectly
+		wp_die( 'arke_get_post_meta() requires a post id if not used in the loop.' );
 	}
 
-	return $presentation;
-}
+	// If the theme object cache is not enabled or we can't find the
+	// metadata in the object cache, go get it
+	global $use_theme_object_cache, $theme_namespace;
+	if ( ! $use_theme_object_cache || false === ( $meta = wp_cache_get( $theme_namespace . '_post_' . $key . '_' . $id ) ) )
+	{
+		$meta = get_post_meta( $id, '_' . $theme_namespace . '_' . $key, true );
 
-// Retrieve importance metadata
-function arke_get_importance( $id = false )
-{
-	// Must be used in the loop if no post id is passed
-	if( ! $id )
-		$id = get_the_ID();
-		
-	$importance = get_post_meta( $id, '_arke_importance', true );
+		// If there's nothing, assign defaults
+		if ( $meta === '' )
+			$meta = $defaults[$key];
 
-	// Default
-	if ( $importance === '' )
-		$importance = 5;
+		if ( $use_theme_object_cache )
+			wp_cache_set( $theme_namespace . '_post_' . $key . '_' . $id, $meta );
+	} 
 
-	return $importance;
+	return $meta;
 }
 
 // Specify the column-span of the main content area for single-item view
@@ -383,16 +396,16 @@ function arke_get_default_colspan()
 -------------------------------------------------- */
 
 // Custom CSS for the login page, Create wp-login.css in your theme folder
-add_action('login_head', 'wpfme_loginCSS');
-function wpfme_loginCSS()
+add_action('login_head', 'arke_loginCSS');
+function arke_loginCSS()
 {
 	echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/wp-login.css"/>';
 }
 
 // Put post thumbnails into rss feed
-add_filter('the_excerpt_rss', 'wpfme_feed_post_thumbnail');
-add_filter('the_content_feed', 'wpfme_feed_post_thumbnail');
-function wpfme_feed_post_thumbnail( $content )
+add_filter('the_excerpt_rss', 'arke_feed_post_thumbnail');
+add_filter('the_content_feed', 'arke_feed_post_thumbnail');
+function arke_feed_post_thumbnail( $content )
 {
 	global $post;
 	if(has_post_thumbnail($post->ID))
@@ -424,20 +437,20 @@ class Plaintext_Cat_Walker extends Walker_Category
 -------------------------------------------------- */
 
 // Profiler checkpoints
-add_action( 'wp_loaded', 'set_checkpoint_wp_loaded' );
-function set_checkpoint_wp_loaded()
+add_action( 'wp_loaded', 'arke_set_checkpoint_wp_loaded' );
+function arke_set_checkpoint_wp_loaded()
 {
 	apply_filters("debug", "WordPress loaded");
 }
 
-add_action( 'wp_head', 'set_checkpoint_wp_head' );
-function set_checkpoint_wp_head()
+add_action( 'wp_head', 'arke_set_checkpoint_wp_head' );
+function arke_set_checkpoint_wp_head()
 {
 	apply_filters("debug", "wp_head()");
 }
 
-add_action( 'the_post', 'set_checkpoint_the_post' );
-function set_checkpoint_the_post( $post )
+add_action( 'the_post', 'arke_set_checkpoint_the_post' );
+function arke_set_checkpoint_the_post( $post )
 {
 	apply_filters("debug", "Post: " . $post->post_title);
 }

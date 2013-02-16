@@ -51,8 +51,8 @@ if ( ! $use_theme_transients || false === ( $rendered_loop = get_transient( $the
 	{
 		the_post();
 
-		$importance = arke_get_importance();
-		$presentation = arke_get_presentation();
+		$importance = arke_get_post_meta( 'importance' );
+		$presentation = arke_get_post_meta( 'presentation' );
 
 		// Set layout variable for thumbnails
 		$colspan = $layout[$column_index];
