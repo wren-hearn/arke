@@ -1,0 +1,12 @@
+
+/* Editor Styles
+-------------------------------------------------- */
+
+/*
+	Here we're going to eschew performance considerations and
+	just load the styles from the site, even though @import is
+	icky and the editor won't use the vast majority of styles.
+*/
+
+@import url('bootstrap-custom.min.css');
+@import url('../style.css');

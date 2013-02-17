@@ -13,14 +13,11 @@ if ( ! have_posts() )
 global $theme_namespace, $use_theme_transients;
 if ( ! $use_theme_transients || false === ( $rendered_loop = get_transient( $theme_namespace . '_homepage_loop' ) ) )
 {
-
-
 	/* Preprocessing
 	-------------------------------------------------- */
 
 	// Plain old loop, but buffer the output and save it
 	// to an array along with presentation information.
-
 
 	$cols = array();
 

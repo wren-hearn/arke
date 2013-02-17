@@ -6,7 +6,7 @@ Author: Jeffrey Hearn
 Author URI: http://www.fondpageant.com
 Version: .1
 Version: 1.0
-Tags: responsive, two-columns, fixed-width, custom-header, custom-background, threaded-comments, sticky-post, translation-ready, microformats, rtl-language-support, bootstrap, less
+Tags: custom-background,custom-header,custom-menu,editor-style,featured-images,microformats,post-formats,rtl-language-support,sticky-post,theme-options,threaded-comments,translation-ready
 
 License: GNU Public License v3
 License URI: http://www.gnu.org/licenses/gpl.html
@@ -144,10 +144,23 @@ embed, object, video, iframe {
 /* WordPress Generated Styles
 -------------------------------------------------- */
 
+/* This is mainly for the WP Editor */
+.wp-caption {
+	border: 0;
+	text-align: left;
+	background-color: transparent;
+	padding-top: 0;
+	margin: 0;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+
 .wp-caption,
 .gallery-caption { margin-top: (@paragraph-gap * 4); clear: both; }
 	.wp-caption-text { margin: (@paragraph-gap) 0 (@paragraph-gap * 4) 0; }
 	.wp-caption img { margin: 0; }
+
+
 
 .aligncenter,
 a img.aligncenter {
@@ -162,7 +175,10 @@ a img.alignright { float:right; margin-left: (@paragraph-gap * 4); clear: both; 
 .alignleft,
 a img.alignleft { float: left; margin-right: (@paragraph-gap * 4); clear: both; }
 
+.sticky { background-color: red; }
 
+/* Highlights post author in comments thread of a post */
+.bypostauthor { background-color: red; }
 
 
 

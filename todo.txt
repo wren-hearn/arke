@@ -1,18 +1,22 @@
 
 http://codex.wordpress.org/Nginx
 
+http://codex.wordpress.org/Theme_Unit_Test
+
+microformats
+
+rtl-language-support
+
+translation-ready
+
 default sidebar content
 	login/forgot password/register accordion
-
-get super-comfortable with xdebug and webgrind
 
 add state fixes to affix styles/JS so they don't show in mobile layout
 
 figure out the right hooks with which to bust the top menu cache
 
 page templates
-
-use the object cache for getting post metadata
 
 make bootstrap a git submodule
 
@@ -22,14 +26,10 @@ theme options page
 
 sticky post support
 
-add == conditional for first query sort so that date is used in the event of matching importances
-
 alternate compact templates for post formats
 
 no-js share buttons
 	https://github.com/tosbourn/nojs-socialshare
-
-catfish custom post type
 
 pagespeed optimizations
 
@@ -50,18 +50,6 @@ framework for prefetch and ad serving that supports multiple profiles to load ba
 	http://css-tricks.com/enquire-js-media-query-callbacks-in-javascript/
 	http://wicky.nillia.ms/enquire.js/
 
-homepage layout which allows for mix of image/content/lists/carousels. maybe have a top bucket for newest content, then one for key categories, and fill out the rest with the last week of material with a day per row of elements
-	add option to hide from homepage?
-	priority option to push elements left (important) or right (unimportant)?
-	I GOT IT LOL
-		sort before column split by priority
-		sort after column split by reverse chronological but GROUP BY DAY, not absolute time, so more important stories will still be above others despite publishing order
-		horizontal axis is importance, vertical axis is freshness
-
-Ubiquitous use of WordPress transients API to minimize queries
-
-homepage setup with option to select the categories the homepage draws from
-
 category/tag pages which show highlights based on post priority
 
 http://wp.smashingmagazine.com/2012/09/12/secrets-high-traffic-wordpress-blogs/
@@ -72,7 +60,7 @@ fuck with queries?
 	
 
 
-For child themes:
+For child themes and plugins:
 
 re-do form validation using Parsley and Garlic
 	http://parsleyjs.org/
@@ -85,6 +73,8 @@ Put latest twitter post(s?) on homepage with pic of author like BBC world news
 Replace Jetpack
 	Use post importance to populate "most popular posts" module
 	Find super lightweight way to do the same video/audio embed
+
+catfish custom post type
 
 // Remove unneeded widgets that have undesirable query overhead
 //add_action( 'widgets_init', 'remove_unneeded_widgets' );

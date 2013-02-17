@@ -86,11 +86,12 @@ add_image_size( '7-col-thumb', 670, 200, true );
 add_image_size( '8-col-thumb', 770, 200, true );
 */
 
-
-
-
 // All post formats
 add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', 'quote', 'status', 'video', 'audio', 'chat' ) );
+
+// Theme the TinyMCE editor
+add_editor_style('css/arke-editor-styles.css');
+
 
 
 
@@ -98,16 +99,29 @@ add_theme_support( 'post-formats', array( 'aside', 'gallery', 'link', 'image', '
 -------------------------------------------------- */
 if( !is_admin() )
 {
-	add_action('wp_enqueue_scripts', 'arke_script_setup');
-	function arke_script_setup()
+
+	// Deferred Loading of JS
+	// https://developers.google.com/speed/docs/best-practices/payload#DeferLoadingJS
+	// Priority of 100 pushes this further after any other functions
+	add_action( 'wp_footer', 'arke_script_load', 100 );
+	function arke_script_load()
 	{
-		wp_enqueue_script(
-			'arke-combined',
-			get_template_directory_uri() . '/js/arke-combined.js',
-			array(),  // no deps
-			False,  // no version
-			True  // load in footer
-		);
+		?>
+		
+		<script type="text/javascript">
+			function downloadJSAtOnload() {
+				var element = document.createElement("script");
+				element.src = "<?php echo get_template_directory_uri(); ?>/js/arke-combined.js";
+				document.body.appendChild(element);
+			}
+			if (window.addEventListener)
+				window.addEventListener("load", downloadJSAtOnload, false);
+			else if (window.attachEvent)
+				window.attachEvent("onload", downloadJSAtOnload);
+			else window.onload = downloadJSAtOnload;
+		</script>
+
+		<?php
 	}
 
 	// Form helper scripts
@@ -215,7 +229,7 @@ function arke_presentation_meta_box_display( $post )
 	// Use nonce for verification
 	wp_nonce_field( 'arke_presentation_meta_box_action', 'arke_presentation_meta_box_nonce' );
 
-	$presentation = arke_get_post_meta( 'presentataion', $post->ID );
+	$presentation = arke_get_post_meta( 'presentation', $post->ID );
 	$importance = arke_get_post_meta( 'importance', $post->ID );
 
 	?>
@@ -314,15 +328,19 @@ function arke_presentation_save( $post_id )
 /* Post Presentation Helper Functions
 -------------------------------------------------- */
 
-function arke_column_sort_date( $a, $b )
-{
-    return strcmp( $b['date'], $a['date'] );
-}
-
+// This sort operates on the global array of posts ($wp_query->posts)
 function arke_query_sort_importance( $a, $b )
 {
     return arke_get_post_meta( 'importance', $a->ID ) < arke_get_post_meta( 'importance', $b->ID );
-    
+}
+
+// This sort operates on a theme-native 'column' of posts
+function arke_column_sort_date( $a, $b )
+{
+	if ( $b['date'] != $a['date'] )
+		return strcmp( $b['date'], $a['date'] );
+	else
+		return $a['importance'] < $b['importance'];
 }
 
 // Loop through a column
