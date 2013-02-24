@@ -31,12 +31,13 @@ if ( ! $use_theme_transients || false === ( $typeahead = get_transient( $theme_n
 }
 ?>
 
-<form class="search search-built-in" role="search" method="get" id="searchform" action="http://localhost/">
-	<div class="input-append search-container">
+<form class="span3 search search-built-in" role="search" method="get" id="searchform" action="http://localhost/">
+	<div class="input-group search-container">
 		<label class="screen-reader-text hidden" for="s">Search for:</label>
-		<input type="text" value="" name="s" id="s" class="span3" data-provide="typeahead" data-source='<?php echo $typeahead; ?>'/>
+		<input type="text" value="" name="s" id="s" data-provide="typeahead" data-source='<?php echo $typeahead; ?>'/>
 		<!-- <button class="btn" type="button">Search</button> -->
-		<button class="btn" type="submit"><i class="icon-search"></i></button>
+		<div class="input-group-btn">
+			<button class="btn" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+		</div>
 	</div>
 </form>
-

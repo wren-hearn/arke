@@ -49,10 +49,9 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
 
 jQuery(document).ready(function($) {
 
-	$('#colhead-wrapper').height($("#colhead").height());
-	$('#colhead').affix({
-		offset: $('#colhead').position()
-	});
-
+	// Affix
+	$('#colhead-wrapper').height($("#colhead-wrapper").height());  // Prevents content re-flow when child is moved out of document flow
+	$('#colhead').width($("#colhead").width());  // Prevents container from expanding beyond the normal width of the page
+	$('#colhead').affix({ offset: $('#colhead').position() });
 
 });

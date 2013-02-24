@@ -50,17 +50,22 @@ For Aaron.
 @primary-text: #000000;
 @secondary-text: #ffffff;
 
+@menu-vertical-padding: 10px;
+
 @primary-column: #57D8F1;
 @secondary-column: #267A8A;
 @darken-column: 50%;
+@column-border: #ccc;
 
 @link: #08C;
 @link-hover: #005580;
 
-@text-padding: 1em;
+@text-padding: 1.5em;
 @outer-padding: 6px;
 
 @paragraph-gap: 0.5em;
+
+@mobile-width: 768px;
 
 @thumbnail-height: 200px;
 
@@ -72,6 +77,16 @@ For Aaron.
 blockquote p + p { margin-top: @paragraph-gap; }
 pre p { margin-bottom: 0; }
 h3 { line-height: 30px; }
+
+@media screen and (min-width: 1200px) {
+	[class^="span"] {
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+}
+
+.row::before, .row::after { content: none; }
+
 
 
 
@@ -123,19 +138,13 @@ embed, object, video, iframe {
 /* Layout
 -------------------------------------------------- */
 
-@media screen and (max-width: 767px) {
+
+@media screen and (max-width: @mobile-width) {
 	body {
-		padding-left: (20px - @outer-padding);
-		padding-right: (20px - @outer-padding);
+		padding-left: (20px);
+		padding-right: (20px);
 	}
 }
-
-/*
-.container {
-	.transparent-container;
-	padding: @outer-padding;
-}
-*/
 
 .grid-preview { background-color: fadeout( black, 35% ); color: white; height: 2em; margin-bottom: 0.25em; margin-top: 0.25em; text-align: center; line-height: 2em; }
 
@@ -209,7 +218,7 @@ img.alignnone {
 		display: block;
 		float: left;
 		clear: both;
-		padding: (@text-padding / 4) (@text-padding / 2);
+		padding: 0.25em 0.5em;
 		.transparent-ultra-readable;
 	}
 	.site-header-title { margin: 0.5em 0 0 5%; }
@@ -229,19 +238,15 @@ img.alignnone {
 .main-navigation { text-align: left; }
 	.main-navigation li {
 		margin-top: 24px;
-		margin-top: 1.714285714rem;
-		font-size: 12px;
-		font-size: 0.857142857rem;
-		line-height: 1.42857143;
 	}
 
-@media screen and (max-width: 599px) {
+@media screen and (max-width: @mobile-width ) {
 	.main-navigation > div > ul { margin: 0; background-color: darken( @menu-background-submenu, 20% ); }
 	.main-navigation li { list-style-type: none; margin: 0; }
 	.main-navigation li a {
 		display: block;
 		background-color: @menu-background;
-		padding: (@text-padding * 0.75);
+		padding: ( 0.75em );
 		border-bottom: 1px solid #ccc;
 		text-transform: uppercase;
 	}
@@ -249,7 +254,7 @@ img.alignnone {
 	.main-navigation .menu-toggle { margin: 0; }
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: @mobile-width) {
 	.main-navigation > div > ul {
 		display: inline-block !important;
 		text-align: left;
@@ -264,15 +269,15 @@ img.alignnone {
 	}
 	.main-navigation li a, .main-navigation li { display: inline-block; }
 	.main-navigation li a {
+		padding: @menu-vertical-padding 0;
 		border-bottom: 0;
 		color: @menu-foreground;
-		line-height: 3.692307692;
+		line-height: 1.6em;
 		text-transform: uppercase;
 		white-space: nowrap;
 	}
 	.main-navigation li {
 		margin: 0 20px 0 0;
-		margin: 0 2rem 0 0;
 		position: relative;
 	}
 	.main-navigation li ul {
@@ -287,13 +292,9 @@ img.alignnone {
 			color: @menu-foreground;
 			background-color: @menu-background-submenu;
 			display: block;
-			font-size: 11px;
-			font-size: 0.785714286rem;
-			line-height: 2.181818182;
+
 			padding: 8px 10px;
-			padding: 0.571428571rem 0.714285714rem;
 			width: 180px;
-			width: 12.85714286rem;
 			white-space: normal;
 		}
 			.main-navigation li ul li a:hover {
@@ -305,7 +306,7 @@ img.alignnone {
 /* State */
 .main-navigation > div > ul { display: none; }
 .main-navigation .toggled-on { display: block; }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: @mobile-width) {
 	.main-navigation li ul { display: none; }
 	.main-navigation ul li:hover > ul { display: block; }	
 	.main-navigation .menu-toggle { display: none; }
@@ -316,6 +317,12 @@ img.alignnone {
 /* Column Heading Module (Affixed with Bootstrap)
 -------------------------------------------------- */
 
+#colhead-wrapper { overflow: hidden; }
+
+/*
+#colhead.affix-top { width: 100%; }
+#colhead.affix { width: auto; } 
+*/
 
 
 .colhead-head {
@@ -337,12 +344,16 @@ img.alignnone {
 }
 
 /* State */
-#colhead.affix { top: 0; z-index: 1000; }
+#colhead.affix { top: 0; z-index: 1000; display: block; float: none; }
 
 .affix .colhead-head {
 	.colhead-transitions( 0.5s );
 	background-color: darken( @primary-column, @darken-column );
 	color: darken( @secondary-text, @darken-column );
+}
+
+@media screen and (max-width: @mobile-width ) {
+	#colhead-wrapper { display: none; }
 }
 
 /* Subclasses */
@@ -353,27 +364,49 @@ img.alignnone {
 
 
 
+/* Column Container Module
+-------------------------------------------------- */
+
+@media screen and (min-width: @mobile-width) {
+	.colcontainer {
+		display: table;
+		background-color: @primary-foreground;
+	}
+}
+
+
+
+/* Column Module
+-------------------------------------------------- */
+
+@media screen and (min-width: @mobile-width) {
+	.column { display: table-cell; float: none; vertical-align: top;  }
+		.column + .column { border-left: 1px solid @column-border; }
+}
+
 
 /* Big Post Excerpt Module
 -------------------------------------------------- */
 
-.full-excerpt { }
+@space-between-posts: 3px;
+
+.full-excerpt {}
 	.full-excerpt + .full-excerpt {
-		margin-top: (@outer-padding * 0.5);
+		margin-top: @space-between-posts;
 	}
 	.full-excerpt-inset {
 		.box-sizing( border-box );
 		overflow: auto;
 		background-color: @primary-foreground;
 		.side-padding( @text-padding );
-		.top-padding( @text-padding );
+		.top-padding( 1em );
 	}
 		.full-excerpt-inset > .post-icon {
 			float: left;
 			margin-right: (@text-padding / 2);
 			background-color: @primary-foreground;
 			.box-sizing( border-box );
-			font-size: (@text-padding * 2);
+			font-size: 2em;
 		}
 	.full-excerpt-thumbnail-link {
 		color: @primary-text;
@@ -387,9 +420,9 @@ img.alignnone {
 				display: inline;
 				margin: 0;
 				position: absolute;
-				bottom: (@text-padding / 2);
+				bottom: 0.5em;
 				left: 0;
-				padding: (@text-padding / 4);
+				padding: 0.25em;
 				.transparent-readable;
 			}
 

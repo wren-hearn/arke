@@ -72,16 +72,10 @@ iframe {
 -------------------------------------------------- */
 @media screen and (max-width: 767px) {
   body {
-    padding-left: 14px;
-    padding-right: 14px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 }
-/*
-.container {
-	.transparent-container;
-	padding: @outer-padding;
-}
-*/
 .grid-preview {
   background-color: rgba(0, 0, 0, 0.65);
   color: white;
@@ -220,7 +214,7 @@ img.alignnone {
   .main-navigation ul {
     margin: 0;
     text-indent: 0;
-    padding-left: 1em;
+    padding-left: 1.5em;
     box-sizing: border-box;
   }
   .main-navigation li a,
@@ -290,7 +284,7 @@ img.alignnone {
 -------------------------------------------------- */
 .colhead-head {
   box-sizing: border-box;
-  padding: 0 1em;
+  padding: 0 1.5em;
   -moz-transition-property: background-color, color;
   -moz-transition-duration: 0.5s;
   -moz-transition-timing-function: ease-out;
@@ -325,6 +319,23 @@ img.alignnone {
 .affix .colhead-other-stories {
   background-color: #000000;
 }
+/* Column Container Module
+-------------------------------------------------- */
+.colcontainer {
+  overflow: auto;
+  background-color: #ffffff;
+  display: table;
+}
+/* Column Module
+-------------------------------------------------- */
+.column {
+  display: table-cell;
+  overflow: auto;
+}
+.column + .column {
+  box-sizing: border-box;
+  border-left: 1px solid #cccccc;
+}
 /* Big Post Excerpt Module
 -------------------------------------------------- */
 .full-excerpt + .full-excerpt {
@@ -336,13 +347,13 @@ img.alignnone {
   box-sizing: border-box;
   overflow: auto;
   background-color: #ffffff;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
   padding-top: 1em;
 }
 .full-excerpt-inset > .post-icon {
   float: left;
-  margin-right: 0.5em;
+  margin-right: 0.75em;
   background-color: #ffffff;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;

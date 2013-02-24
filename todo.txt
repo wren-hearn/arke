@@ -12,8 +12,6 @@ translation-ready
 default sidebar content
 	login/forgot password/register accordion
 
-add state fixes to affix styles/JS so they don't show in mobile layout
-
 figure out the right hooks with which to bust the top menu cache
 
 page templates
@@ -73,8 +71,6 @@ Put latest twitter post(s?) on homepage with pic of author like BBC world news
 Replace Jetpack
 	Use post importance to populate "most popular posts" module
 	Find super lightweight way to do the same video/audio embed
-
-catfish custom post type
 
 // Remove unneeded widgets that have undesirable query overhead
 //add_action( 'widgets_init', 'remove_unneeded_widgets' );

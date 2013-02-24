@@ -7,7 +7,7 @@
 		<?php get_template_part( 'loops/loop' ); ?>
 	</div>
 
-	<div class="sidebar span4">
+	<div class="span4 sidebar">
 		<?php get_sidebar(); ?>
 	</div>
 

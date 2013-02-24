@@ -117,7 +117,6 @@ if ( ! $use_theme_transients || false === ( $rendered_loop = get_transient( $the
 		<?php
 	}
 	?>
-
 	<div id="colhead-wrapper">
 		<div id="colhead" class="row">
 			<div class="span5 colhead-head colhead-top-story"><h4>Top Stories</h4></div>
@@ -125,17 +124,17 @@ if ( ! $use_theme_transients || false === ( $rendered_loop = get_transient( $the
 		</div>
 	</div>
 
-	<div class="row">
+	<div class="row colcontainer">
 
-		<div class="span5">
+		<div class="span5 column">
 			<?php arke_output_column( $cols[0] ); ?>
 		</div>
 
-		<div class="span3">
+		<div class="span3 column">
 			<?php arke_output_column( $cols[1] ); ?>
 		</div>
 
-		<div class="span4">
+		<div class="span4 column">
 			<?php arke_output_column( $cols[2] ); ?>
 		</div>
 
