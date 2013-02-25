@@ -26,7 +26,8 @@ sticky post support
 
 alternate compact templates for post formats
 
-no-js share buttons
+no-js share buttons below the fold
+	http://newhive.com/kirill/let-s-all-avoid-designing-like-this?q=%23Featured
 	https://github.com/tosbourn/nojs-socialshare
 
 pagespeed optimizations

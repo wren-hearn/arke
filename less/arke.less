@@ -428,10 +428,26 @@ img.alignnone {
 
 
 
+/* Banner Module
+-------------------------------------------------- */
 
+@banner-caption-height: 30px;
 
+.banner > div { display: none; }
+.banner-caption { height: @banner-caption-height; }
 
+	/* Subclasses */
+	.banner-position-a { width: 728px; height: 90px + @banner-caption-height; }
+	.banner-position-b,
+	.banner-mobile-ad { width: 300px; height: 250px + @banner-caption-height; }
 
-
+/* State */
+@media screen and (max-width: @mobile-width) {
+	.banner-position-a,
+	.banner-position-b { display: none; }
+}
+@media screen and (min-width: @mobile-width) {
+	.banner-mobile-ad { display: none; }
+}
 
 

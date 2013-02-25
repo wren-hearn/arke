@@ -28,6 +28,10 @@ $use_theme_object_cache = false;
 global $use_compiled_css;
 $use_compiled_css = false;
 
+// Enable banner support
+global $arke_display_ads;
+$arke_display_ads = true;
+
 // Enable theme design helpers like grid reference, banner placeholders, etc.
 $theme_helpers = false;
 

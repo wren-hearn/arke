@@ -38,6 +38,31 @@
 				</div>
 
 
+
+				<?php global $arke_display_ads; if ( $arke_display_ads ): ?>
+					<div class="banner banner-position-a">
+						<div id="div-gpt-ad-1361748545135-1-caption" class="banner-caption">Advertisement</div>
+						<div id="div-gpt-ad-1361748545135-1"></div>
+					</div>
+				<?php endif; ?>
+
+				<?php global $arke_display_ads; if ( $arke_display_ads ): ?>
+					<div class="banner banner-position-b">
+						<div id="div-gpt-ad-1361748545135-0-caption" class="banner-caption">Advertisement</div>
+						<div id="div-gpt-ad-1361748545135-0"></div>
+					</div>
+				<?php endif; ?>
+
+				<?php global $arke_display_ads; if ( $arke_display_ads ): ?>
+					<div class="banner banner-mobile-ad">
+						<div id='div-gpt-ad-1361755671674-0-caption' class="banner-caption">Advertisement</div>
+						<div id='div-gpt-ad-1361755671674-0'></div>
+					</div>
+				<?php endif; ?>
+
+
+
+
 				<?php get_search_form(); ?>
 
 

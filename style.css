@@ -42,6 +42,16 @@ pre p {
 h3 {
   line-height: 30px;
 }
+@media screen and (min-width: 1200px) {
+  [class^="span"] {
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+}
+.row::before,
+.row::after {
+  content: none;
+}
 /* Mixins
 -------------------------------------------------- */
 .transparent-container {
@@ -70,7 +80,7 @@ iframe {
 }
 /* Layout
 -------------------------------------------------- */
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 768px) {
   body {
     padding-left: 20px;
     padding-right: 20px;
@@ -176,12 +186,8 @@ img.alignnone {
 }
 .main-navigation li {
   margin-top: 24px;
-  margin-top: 1.714285714rem;
-  font-size: 12px;
-  font-size: 0.857142857rem;
-  line-height: 1.42857143;
 }
-@media screen and (max-width: 599px) {
+@media screen and (max-width: 768px) {
   .main-navigation > div > ul {
     margin: 0;
     background-color: rgba(191, 191, 191, 0.9);
@@ -204,7 +210,7 @@ img.alignnone {
     margin: 0;
   }
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .main-navigation > div > ul {
     display: inline-block !important;
     text-align: left;
@@ -222,15 +228,15 @@ img.alignnone {
     display: inline-block;
   }
   .main-navigation li a {
+    padding: 10px 0;
     border-bottom: 0;
     color: #0088cc;
-    line-height: 3.692307692;
+    line-height: 1.6em;
     text-transform: uppercase;
     white-space: nowrap;
   }
   .main-navigation li {
     margin: 0 20px 0 0;
-    margin: 0 2rem 0 0;
     position: relative;
   }
   .main-navigation li ul {
@@ -248,13 +254,8 @@ img.alignnone {
     color: #0088cc;
     background-color: rgba(242, 242, 242, 0.9);
     display: block;
-    font-size: 11px;
-    font-size: 0.785714286rem;
-    line-height: 2.181818182;
     padding: 8px 10px;
-    padding: 0.571428571rem 0.714285714rem;
     width: 180px;
-    width: 12.85714286rem;
     white-space: normal;
   }
   .main-navigation li ul li a:hover {
@@ -269,7 +270,7 @@ img.alignnone {
 .main-navigation .toggled-on {
   display: block;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .main-navigation li ul {
     display: none;
   }
@@ -282,6 +283,13 @@ img.alignnone {
 }
 /* Column Heading Module (Affixed with Bootstrap)
 -------------------------------------------------- */
+#colhead-wrapper {
+  overflow: hidden;
+}
+/*
+#colhead.affix-top { width: 100%; }
+#colhead.affix { width: auto; } 
+*/
 .colhead-head {
   box-sizing: border-box;
   padding: 0 1.5em;
@@ -299,6 +307,8 @@ img.alignnone {
 #colhead.affix {
   top: 0;
   z-index: 1000;
+  display: block;
+  float: none;
 }
 .affix .colhead-head {
   -moz-transition-property: background-color, color;
@@ -311,6 +321,11 @@ img.alignnone {
   background-color: #063943;
   color: #808080;
 }
+@media screen and (max-width: 768px) {
+  #colhead-wrapper {
+    display: none;
+  }
+}
 /* Subclasses */
 .colhead-other-stories {
   background-color: #267a8a;
@@ -321,20 +336,23 @@ img.alignnone {
 }
 /* Column Container Module
 -------------------------------------------------- */
-.colcontainer {
-  overflow: auto;
-  background-color: #ffffff;
-  display: table;
+@media screen and (min-width: 768px) {
+  .colcontainer {
+    display: table;
+    background-color: #ffffff;
+  }
 }
 /* Column Module
 -------------------------------------------------- */
-.column {
-  display: table-cell;
-  overflow: auto;
-}
-.column + .column {
-  box-sizing: border-box;
-  border-left: 1px solid #cccccc;
+@media screen and (min-width: 768px) {
+  .column {
+    display: table-cell;
+    float: none;
+    vertical-align: top;
+  }
+  .column + .column {
+    border-left: 1px solid #cccccc;
+  }
 }
 /* Big Post Excerpt Module
 -------------------------------------------------- */
@@ -376,4 +394,15 @@ img.alignnone {
   left: 0;
   padding: 0.25em;
   background-color: rgba(255, 255, 255, 0.65);
+}
+/* Banner Module
+-------------------------------------------------- */
+/* Subclasses */
+.banner-position-a {
+  width: 728px;
+  height: 90px;
+}
+.banner-position-b {
+  width: 300px;
+  height: 250px;
 }
