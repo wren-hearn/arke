@@ -11,6 +11,8 @@
 
 		<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-custom.min.css">
 
+		TEST
+
 		<?php global $use_compiled_css; if ( $use_compiled_css ): ?>
 			<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/style.css">
 		<?php else: ?>
