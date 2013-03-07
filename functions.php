@@ -42,6 +42,8 @@ $content_width = 742;
 // Define the default colspan for content displayed in the grid
 $default_colspan = 8;
 
+// CDN
+$arke_cdn_path = 'arke.s3-website-us-east-1.amazonaws.com/static/';
 
 
 include_once( 'includes/presentation.php' );
