@@ -9,10 +9,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
 
-		<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-custom.min.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/bootstrap-custom.min.css">
 
 		<?php global $use_compiled_css; if ( $use_compiled_css ): ?>
-			<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/style.css">
+			<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/style.css">
 		<?php else: ?>
 			<link rel="stylesheet/less" type="text/css" href="<?php echo get_template_directory_uri(); ?>/less/arke.less">
 			<script src="<?php echo get_template_directory_uri(); ?>/js/less-1.3.1.min.js" type="text/javascript"></script>	
